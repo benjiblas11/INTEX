@@ -58,6 +58,7 @@
         <th>Phone Number</th>
         <th>Approved Status</th>
         <th>Confirmed Status</th>
+        <th>Edit / Delete</th>
       </tr>
     </thead>
     <tbody>
@@ -106,7 +107,7 @@
 
           </tr>
         <% }) %>
-      <!-- If no Pokémon records are available, show a "No data available" message -->
+      <!-- If no records are available, show a "No data available" message -->
       <% } else { %>
         <tr>
           <td colspan="7">No data available</td>
@@ -114,9 +115,11 @@
       <% } %>
     </tbody>
   </table>
+
   <form action="/addEvents" method="GET" style="display: flex; justify-content: center; margin: 20px 0;">
     <button type="submit">Create New Event</button>
   </form>
+  
   <!-- Button to navigate to the "UserHome" page -->
   <form action="/user-home" method="GET" style="display: flex; justify-content: center; margin: 20px 0;">
     <button type="submit">Back to Admin Dashboard</button>

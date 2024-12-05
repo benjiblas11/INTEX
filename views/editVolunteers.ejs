@@ -1,88 +1,131 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Edit Character</title>
-  <style>
-    form {
-      width: 50%;
-      margin: 20px auto;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      background-color: #F9F9F9;
-      font-size: 12px;
-    }
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: bold;
-    }
-    input, select, button {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    input[type="checkbox"], input[type="radio"] {
-      width: auto;
-      margin-right: 5px;
-    }
-    button {
-      background-color: #4CAF50;
-      color: white;
-      font-size: 12px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #45A049;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Volunteer</title>
+  <link rel="stylesheet" href="/styles.css"> <!-- Link your CSS file -->
 </head>
 <body>
-  <h1 style="text-align: center;">Edit Characters</h1>
+  <h1>Edit Volunteer Details</h1>
+  <form action="/editVolunteers/<%= volunteer.volunteer_id %>" method="POST">
+    <!-- Volunteer First Name -->
+    <div>
+      <label for="vol_first_name">First Name:</label>
+      <input 
+        type="text" 
+        id="vol_first_name" 
+        name="vol_first_name" 
+        value="<%= volunteer.vol_first_name %>" 
+        required 
+        placeholder="Enter first name"
+      >
+    </div>
 
-  <form action="/editVolunteers/<%= characters.id %>" method="POST">   <!-- NOTE this is a editPoke method=POST -->
-    <!-- First Name -->
-    <label for="first_name">First Name</label>
-    <!-- NOTE line 49 has name='first_name'    CRITICAL FOR PARAM STUFF IN index.js--> 
-    <input type="text" id="first_name" name="first_name" value="<%= characters.first_name %>" required oninput="this.value = this.value.toUpperCase()">
+    <!-- Volunteer Last Name -->
+    <div>
+      <label for="vol_last_name">Last Name:</label>
+      <input 
+        type="text" 
+        id="vol_last_name" 
+        name="vol_last_name" 
+        value="<%= volunteer.vol_last_name %>" 
+        required 
+        placeholder="Enter last name"
+      >
+    </div>
 
-    <!-- Last Name -->
-    <label for="last_name">Last Name</label>
-    <input type="text" id="last_name" name="last_name" value="<%= characters.last_name %>" required oninput="this.value = this.value.toUpperCase()">
+    <!-- Volunteer Email -->
+    <div>
+      <label for="vol_email">Email:</label>
+      <input 
+        type="email" 
+        id="vol_email" 
+        name="vol_email" 
+        value="<%= volunteer.vol_email %>" 
+        required 
+        placeholder="Enter email address"
+      >
+    </div>
 
-   <!-- Planets-->
-   <label for="planet_name">Planets</label>
-   <select id="planet_name" name="planet_name">
-       <!-- this is a cool forEach loop to give the option list all the planets -->
-     <% planets.forEach(type => { %>
-       <option value="<%= planet.id %>" <%= characters.planet_name === planet.id ? 'selected' : '' %>>
-         <%= planet.planet_name %>
-       </option>
-     <% }) %>
-   </select>
+    <!-- Volunteer Phone Number -->
+    <div>
+      <label for="vol_phone_num">Phone Number:</label>
+      <input 
+        type="tel" 
+        id="vol_phone_num" 
+        name="vol_phone_num" 
+        value="<%= volunteer.vol_phone_num %>" 
+        required 
+        placeholder="Enter phone number"
+      >
+    </div>
 
-    <!-- is jedi (Checkbox) -->
-    <label for="jedi">
-      <input type="checkbox" id="jedi" name="jedi" value="true" <%= characters.jedi ? 'checked' : '' %>>
-      Active Characters
-    </label>
+    <!-- Volunteer ZIP -->
+    <div>
+      <label for="vol_zip">ZIP Code:</label>
+      <input 
+        type="text" 
+        id="vol_zip" 
+        name="vol_zip" 
+        value="<%= volunteer.vol_zip %>" 
+        required 
+        placeholder="Enter ZIP code"
+      >
+    </div>
 
-    <!-- Weapons -->
-    <label>Preferred Weapon</label>
-    <label>
-      <input type="radio" name="weapon" value="L" <%= characters.weapon === 'L' ? 'checked' : '' %>> LIGHTSABER
-    </label>
-    <label>
-      <input type="radio" name="weapon" value="B" <%= characters.weapon === 'B' ? 'checked' : '' %>> BLASTER
-    </label>
-    <label>
-      <input type="radio" name="weapon" value="N" <%= characters.weapon === 'N' ? 'checked' : '' %>> NONE
-    </label>
+    <!-- Referral Source -->
+    <div>
+      <label for="referral_source">Referral Source:</label>
+      <input 
+        type="text" 
+        id="referral_source" 
+        name="referral_source" 
+        value="<%= volunteer.referral_source %>" 
+        placeholder="Enter referral source"
+      >
+    </div>
+
+    <!-- Sewing Level -->
+    <div>
+      <label for="sewing_level">Sewing Level:</label>
+      <select id="sewing_level" name="sewing_level" required>
+        <option value="Beginner" <%= volunteer.sewing_level === 'Beginner' ? 'selected' : '' %>>Beginner</option>
+        <option value="Intermediate" <%= volunteer.sewing_level === 'Intermediate' ? 'selected' : '' %>>Intermediate</option>
+        <option value="Advanced" <%= volunteer.sewing_level === 'Advanced' ? 'selected' : '' %>>Advanced</option>
+      </select>
+    </div>
+
+    <!-- Willing Hours Per Month -->
+    <div>
+      <label for="willing_hours_per_month">Willing Hours Per Month:</label>
+      <input 
+        type="number" 
+        id="willing_hours_per_month" 
+        name="willing_hours_per_month" 
+        value="<%= volunteer.willing_hours_per_month %>" 
+        required 
+        min="0" 
+        placeholder="Enter hours"
+      >
+    </div>
+
+    <!-- Member Since -->
+    <div>
+      <label for="member_since">Member Since:</label>
+      <input 
+        type="date" 
+        id="member_since" 
+        name="member_since" 
+        value="<%= volunteer.member_since %>" 
+        readonly 
+      >
+    </div>
 
     <!-- Submit Button -->
-    <button type="submit">Save Changes</button>
+    <div>
+      <button type="submit" class="button">Save Changes</button>
+    </div>
   </form>
 </body>
 </html>

@@ -213,6 +213,7 @@ app.get('/view-upcoming-events', (req, res) => {
     .select(
       'event.event_id',
       'event.exp_total_attendance',
+      'event.total_attendance',
       'event.exp_under_18',
       'event.exp_over_18',
       'event.suggested_team_count',
@@ -259,6 +260,7 @@ app.get('/view-upcoming-events-date', (req, res) => {
     .select(
       'event.event_id',
       'event.exp_total_attendance',
+      'event.total_attendance',
       'event.exp_under_18',
       'event.exp_over_18',
       'event.suggested_team_count',
@@ -305,6 +307,7 @@ app.get('/view-completed-events', (req, res) => {
     .select(
       'event.event_id',
       'event.exp_total_attendance',
+      'event.total_attendance',
       'event.exp_under_18',
       'event.exp_over_18',
       'event.suggested_team_count',
@@ -344,9 +347,12 @@ app.get('/view-completed-events', (req, res) => {
     });
 });
 
+app.get('/addEvents', (req, res) => {
+  res.render('addEvents');
+});
 
 // ADMIN Route to handle event form submission
-app.post('/admin-event-request', (req, res) => {
+app.post('/addEvents', (req, res) => {
   // Access each value directly from req.body
   const exp_total_attendance = parseInt(req.body.exp_total_attendance);
   const event_type = req.body.event_type;
@@ -392,13 +398,72 @@ app.post('/admin-event-request', (req, res) => {
       event_contact_phone_num: event_contact_phone_num,
       event_contact_email: event_contact_email,
       approved_status: false, // Default value
-      completed_status: false // Default value
+      confirmed_status: false // Default value
     })
     .then(() => {
       res.redirect('/view-upcoming-events-date'); // Redirect to a success page
     })
     .catch(error => {
       console.error('Error submitting event request:', error);
+      res.status(500).send('Internal Server Error');
+    });
+});
+
+// EDIT VOLUNTEER GET
+app.get('/editEvents/:id', (req, res) => {
+  const id = req.params.id;
+
+  knex('event')
+    .where('event_id', id)
+    .first() // Fetch the first matching record
+    .then(event => {
+      if (!event) {
+        return res.status(404).send('event not found');
+      }
+      res.render('editEvents', { event }); // Pass the volunteer data to the EJS file
+    })
+    .catch(error => {
+      console.error('Error fetching volunteer for editing:', error);
+      res.status(500).send('Internal Server Error');
+    });
+});
+
+// EDIT VOLUNTEER post
+app.post('/editEvents/:id', (req, res) => {
+  const eventId = req.params.id;
+  const updatedEvent = {
+    exp_total_attendance: parseInt(req.body.exp_total_attendance),
+    event_type: req.body.event_type,
+    first_datetime_pref: req.body.first_datetime_pref,
+    sec_datetime_pref: req.body.sec_datetime_pref || null,
+    third_datetime_pref: req.body.third_datetime_pref || null,
+    event_duration: parseFloat(req.body.event_duration),
+    event_street: req.body.event_street,
+    event_city: req.body.event_city,
+    event_state: req.body.event_state,
+    event_zip: req.body.event_zip,
+    event_additional_info: req.body.event_additional_info || null,
+    jen_share_story: req.body.jen_share_story || false,
+    exp_num_sew_machines: parseInt(req.body.exp_num_sew_machines),
+    exp_num_serger_machines: parseInt(req.body.exp_num_serger_machines),
+    exp_under_18: parseInt(req.body.exp_under_18),
+    exp_over_18: parseInt(req.body.exp_over_18),
+    event_contact_first_name: req.body.event_contact_first_name,
+    event_contact_last_name: req.body.event_contact_last_name,
+    event_contact_phone_num: req.body.event_contact_phone_num,
+    event_contact_email: req.body.event_contact_email,
+    approved_status: req.body.approved_status || false,
+    completed_status: req.body.completed_status || false
+  };
+
+  knex('event')
+    .where('id', eventId)
+    .update(updatedEvent)
+    .then(() => {
+      res.redirect('/view-upcoming-events-date');
+    })
+    .catch(error => {
+      console.error('Error updating event:', error);
       res.status(500).send('Internal Server Error');
     });
 });
@@ -414,7 +479,8 @@ app.get('/view-volunteers', (req, res) => {
       'volunteer.vol_zip',
       'volunteer.referral_source',
       'volunteer.sewing_level',
-      'volunteer.willing_hours_per_month'
+      'volunteer.willing_hours_per_month',
+      'volunteer.member_since'
     )
 
     .then(volunteer => {
@@ -427,8 +493,12 @@ app.get('/view-volunteers', (req, res) => {
     });
 });
 
+app.get('/addVolunteers', (req, res) => {
+  res.render('addVolunteers');
+});
+
 // ADMIN VOLUNTEER POST
-app.post('/admin-volunteer-form', async (req, res) => {
+app.post('/addVolunteers', async (req, res) => {
   const {
     vol_first_name,
     vol_last_name,
@@ -437,31 +507,89 @@ app.post('/admin-volunteer-form', async (req, res) => {
     vol_zip,
     referral_source,
     sewing_level,
-    willing_hours_per_month
+    willing_hours_per_month,
   } = req.body;
 
+  const member_since = new Date().toISOString().split('T')[0]; // Default to today's date
+
   try {
-    // Insert volunteer data into the database
-    await pool.query(
-      `INSERT INTO volunteers (vol_first_name, vol_last_name, vol_email, vol_phone_num, vol_zip, referral_source, sewing_level, willing_hours_per_month)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
-      [
-        vol_first_name,
-        vol_last_name,
-        vol_email,
-        vol_phone_num,
-        vol_zip,
-        referral_source,
-        sewing_level,
-        willing_hours_per_month
-      ]
-    );
-    res.redirect('/view-volunteers'); // Redirect to view volunteers page after submission
+    // Insert volunteer data into the database using Knex
+    await knex('volunteer')
+      .insert({
+        vol_first_name: vol_first_name.toUpperCase(), // Convert to uppercase
+        vol_last_name: vol_last_name.toUpperCase(),  // Convert to uppercase
+        vol_email: vol_email,
+        vol_phone_num: vol_phone_num,
+        vol_zip: vol_zip,
+        referral_source: referral_source || null, // Default to null if empty
+        sewing_level: sewing_level,
+        willing_hours_per_month: willing_hours_per_month || 0, // Default to 0 if empty
+        member_since: member_since, // Today's date
+      });
+
+    res.redirect('/view-volunteers'); // Redirect to view volunteers page
   } catch (err) {
     console.error('Error inserting volunteer data:', err);
     res.status(500).send('Error processing your request.');
   }
 });
+
+
+// EDIT VOLUNTEER GET
+app.get('/editVolunteers/:id', (req, res) => {
+  const id = req.params.id;
+
+  knex('volunteer')
+    .where('volunteer_id', id)
+    .first() // Fetch the first matching record
+    .then(volunteer => {
+      if (!volunteer) {
+        return res.status(404).send('Volunteer not found');
+      }
+      res.render('editVolunteers', { volunteer }); // Pass the volunteer data to the EJS file
+    })
+    .catch(error => {
+      console.error('Error fetching volunteer for editing:', error);
+      res.status(500).send('Internal Server Error');
+    });
+});
+
+// EDIT VOLUNTEER POST 
+app.post('/editVolunteers/:id', async (req, res) => {
+  const id = req.params.id;
+
+  const {
+    vol_first_name,
+    vol_last_name,
+    vol_email,
+    vol_phone_num,
+    vol_zip,
+    referral_source,
+    sewing_level,
+    willing_hours_per_month,
+  } = req.body;
+
+  try {
+    await knex('volunteer')
+      .where('volunteer_id', id)
+      .update({
+        vol_first_name: vol_first_name.toUpperCase(), // Convert to uppercase
+        vol_last_name: vol_last_name.toUpperCase(),  // Convert to uppercase
+        vol_email: vol_email,
+        vol_phone_num: vol_phone_num,
+        vol_zip: vol_zip,
+        referral_source: referral_source || null, // Default to null if empty
+        sewing_level: sewing_level,
+        willing_hours_per_month: willing_hours_per_month || 0, // Default to 0 if empty
+      });
+
+    res.redirect('/view-volunteers'); // Redirect to the list of volunteers
+  } catch (err) {
+    console.error('Error updating volunteer data:', err);
+    res.status(500).send('Error processing your request.');
+  }
+});
+
 
 // view admin GET
 app.get('/view-admins', (req, res) => {
@@ -507,7 +635,7 @@ app.post('/addAdmin', (req, res) => {
   knex('admin')
     .insert({
       admin_first_name: admin_first_name.toUpperCase(), // Ensure description is uppercase
-      admin_last_name: admin_last_name,
+      admin_last_name: admin_last_name.toUpperCase(),
       admin_email: admin_email,
       hashed_password: hashed_password,
       created_at: created_at,
@@ -558,10 +686,10 @@ app.post('/editAdmin/:id', (req, res) => {
     .where('id', id)
     .update({
       admin_first_name: admin_first_name.toUpperCase(),
-      admin_last_name,
-      admin_email,
-      hashed_password, // Ensure this is hashed before storing
-      created_at,
+      admin_last_name: admin_last_name.toUpperCase(),
+      admin_email: admin_email,
+      hashed_password: hashed_password, // Ensure this is hashed before storing
+      created_at: created_at,
       updated_at: new Date().toISOString(), // Auto-update the timestamp
     })
     .then(() => {
@@ -582,7 +710,35 @@ app.post('/deleteAdmin/:id', (req, res) => {
     .where('id', id)
     .del() // Deletes the record with the specified ID
     .then(() => {
-      res.redirect('/viewAdmins'); // Redirect to the character list after deletion
+      res.redirect('/view-admins'); // Redirect to the character list after deletion
+    })
+    .catch(error => {
+      console.error('Error deleting character:', error);
+      res.status(500).send('Internal Server Error');
+    });
+});
+
+app.post('/deleteEvents/:id', (req, res) => {
+  const id = req.params.id;
+  knex('event')
+    .where('id', id)
+    .del() // Deletes the record with the specified ID
+    .then(() => {
+      res.redirect('/view-upcoming-events'); // Redirect to the character list after deletion
+    })
+    .catch(error => {
+      console.error('Error deleting character:', error);
+      res.status(500).send('Internal Server Error');
+    });
+});
+
+app.post('/deleteVolunteers/:id', (req, res) => {
+  const id = req.params.id;
+  knex('volunteer')
+    .where('id', id)
+    .del() // Deletes the record with the specified ID
+    .then(() => {
+      res.redirect('/view-volunteers'); // Redirect to the character list after deletion
     })
     .catch(error => {
       console.error('Error deleting character:', error);

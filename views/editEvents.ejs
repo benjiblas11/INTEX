@@ -1,88 +1,80 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Edit Character</title>
-  <style>
-    form {
-      width: 50%;
-      margin: 20px auto;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      background-color: #F9F9F9;
-      font-size: 12px;
-    }
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: bold;
-    }
-    input, select, button {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    input[type="checkbox"], input[type="radio"] {
-      width: auto;
-      margin-right: 5px;
-    }
-    button {
-      background-color: #4CAF50;
-      color: white;
-      font-size: 12px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #45A049;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Event</title>
 </head>
 <body>
-  <h1 style="text-align: center;">Edit Characters</h1>
+    <h1>Edit Event</h1>
+    <form action="/editEvents/<%= event.id %>" method="POST">
+        <label for="exp_total_attendance">Expected Total Attendance:</label>
+        <input type="number" id="exp_total_attendance" name="exp_total_attendance" value="<%= event.exp_total_attendance %>" required><br>
 
-  <form action="/editEvents/<%= characters.id %>" method="POST">   <!-- NOTE this is a editPoke method=POST -->
-    <!-- First Name -->
-    <label for="first_name">First Name</label>
-    <!-- NOTE line 49 has name='first_name'    CRITICAL FOR PARAM STUFF IN index.js--> 
-    <input type="text" id="first_name" name="first_name" value="<%= characters.first_name %>" required oninput="this.value = this.value.toUpperCase()">
+        <label for="event_type">Event Type:</label>
+        <input type="text" id="event_type" name="event_type" value="<%= event.event_type %>" required><br>
 
-    <!-- Last Name -->
-    <label for="last_name">Last Name</label>
-    <input type="text" id="last_name" name="last_name" value="<%= characters.last_name %>" required oninput="this.value = this.value.toUpperCase()">
+        <label for="first_datetime_pref">First Date/Time Preference:</label>
+        <input type="datetime-local" id="first_datetime_pref" name="first_datetime_pref" value="<%= event.first_datetime_pref %>" required><br>
 
-   <!-- Planets-->
-   <label for="planet_name">Planets</label>
-   <select id="planet_name" name="planet_name">
-       <!-- this is a cool forEach loop to give the option list all the planets -->
-     <% planets.forEach(type => { %>
-       <option value="<%= planet.id %>" <%= characters.planet_name === planet.id ? 'selected' : '' %>>
-         <%= planet.planet_name %>
-       </option>
-     <% }) %>
-   </select>
+        <label for="sec_datetime_pref">Second Date/Time Preference:</label>
+        <input type="datetime-local" id="sec_datetime_pref" name="sec_datetime_pref" value="<%= event.sec_datetime_pref %>"><br>
 
-    <!-- is jedi (Checkbox) -->
-    <label for="jedi">
-      <input type="checkbox" id="jedi" name="jedi" value="true" <%= characters.jedi ? 'checked' : '' %>>
-      Active Characters
-    </label>
+        <label for="third_datetime_pref">Third Date/Time Preference:</label>
+        <input type="datetime-local" id="third_datetime_pref" name="third_datetime_pref" value="<%= event.third_datetime_pref %>"><br>
 
-    <!-- Weapons -->
-    <label>Preferred Weapon</label>
-    <label>
-      <input type="radio" name="weapon" value="L" <%= characters.weapon === 'L' ? 'checked' : '' %>> LIGHTSABER
-    </label>
-    <label>
-      <input type="radio" name="weapon" value="B" <%= characters.weapon === 'B' ? 'checked' : '' %>> BLASTER
-    </label>
-    <label>
-      <input type="radio" name="weapon" value="N" <%= characters.weapon === 'N' ? 'checked' : '' %>> NONE
-    </label>
+        <label for="event_duration">Event Duration (hours):</label>
+        <input type="number" step="0.5" id="event_duration" name="event_duration" value="<%= event.event_duration %>" required><br>
 
-    <!-- Submit Button -->
-    <button type="submit">Save Changes</button>
-  </form>
+        <label for="event_street">Event Street:</label>
+        <input type="text" id="event_street" name="event_street" value="<%= event.event_street %>" required><br>
+
+        <label for="event_city">Event City:</label>
+        <input type="text" id="event_city" name="event_city" value="<%= event.event_city %>" required><br>
+
+        <label for="event_state">Event State:</label>
+        <input type="text" id="event_state" name="event_state" value="<%= event.event_state %>" required><br>
+
+        <label for="event_zip">Event Zip:</label>
+        <input type="text" id="event_zip" name="event_zip" value="<%= event.event_zip %>" required><br>
+
+        <label for="event_additional_info">Additional Info:</label>
+        <textarea id="event_additional_info" name="event_additional_info"><%= event.event_additional_info %></textarea><br>
+
+        <label for="jen_share_story">Jen Share Story:</label>
+        <input type="checkbox" id="jen_share_story" name="jen_share_story" <%= event.jen_share_story ? 'checked' : '' %>><br>
+
+        <label for="exp_num_sew_machines">Expected Number of Sewing Machines:</label>
+        <input type="number" id="exp_num_sew_machines" name="exp_num_sew_machines" value="<%= event.exp_num_sew_machines %>" required><br>
+
+        <label for="exp_num_serger_machines">Expected Number of Serger Machines:</label>
+        <input type="number" id="exp_num_serger_machines" name="exp_num_serger_machines" value="<%= event.exp_num_serger_machines %>" required><br>
+
+        <label for="exp_under_18">Expected Number of Participants Under 18:</label>
+        <input type="number" id="exp_under_18" name="exp_under_18" value="<%= event.exp_under_18 %>" required><br>
+
+        <label for="exp_over_18">Expected Number of Participants Over 18:</label>
+        <input type="number" id="exp_over_18" name="exp_over_18" value="<%= event.exp_over_18 %>" required><br>
+
+        <label for="event_contact_first_name">Contact First Name:</label>
+        <input type="text" id="event_contact_first_name" name="event_contact_first_name" value="<%= event.event_contact_first_name %>" required><br>
+
+        <label for="event_contact_last_name">Contact Last Name:</label>
+        <input type="text" id="event_contact_last_name" name="event_contact_last_name" value="<%= event.event_contact_last_name %>" required><br>
+
+        <label for="event_contact_phone_num">Contact Phone Number:</label>
+        <input type="text" id="event_contact_phone_num" name="event_contact_phone_num" value="<%= event.event_contact_phone_num %>" required><br>
+
+        <label for="event_contact_email">Contact Email:</label>
+        <input type="email" id="event_contact_email" name="event_contact_email" value="<%= event.event_contact_email %>" required><br>
+
+        <label for="approved_status">Approved Status:</label>
+        <input type="checkbox" id="approved_status" name="approved_status" <%= event.approved_status ? 'checked' : '' %>><br>
+
+        <label for="completed_status">Completed Status:</label>
+        <input type="checkbox" id="completed_status" name="completed_status" <%= event.completed_status ? 'checked' : '' %>><br>
+
+        <button type="submit">Save Changes</button>
+    </form>
 </body>
 </html>
