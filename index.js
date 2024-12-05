@@ -2,6 +2,7 @@ let express = require('express');
 let app = express();
 let path = require('path');
 const PORT = process.env.PORT || 3000
+const argon2 = require('argon2'); // CHECK LINE
 // grab html form from file 
 // allows to pull JSON data from form 
 app.use(express.urlencoded( {extended: true} )); 
@@ -21,10 +22,13 @@ app.set("view engine", "ejs");
 // Serve static files (CSS, images, etc.)
 app.use(express.static(path.join(__dirname, 'public')));
 // Define route for home page
-// Serve the login page (login.ejs)
+
+// LOAD THE HOME PAGE
 app.get('/', (req, res) => {
   res.render('index');  // Renders 'login.ejs' file
 });
+
+app.use(express.json()); // CHECK LINE
 // Serve static files (e.g., CSS) if needed
 app.use(express.static('public'));
 // port number, (parameters) => what you want it to do.
@@ -541,3 +545,5 @@ app.post('/submit-volunteer-form', async (req, res) => {
     res.status(500).send('Error processing your request.');
   }
 });
+
+// ABOVE WORKS --------------------------------------------------------
