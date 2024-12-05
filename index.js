@@ -9,8 +9,8 @@ app.use(express.urlencoded( {extended: true} ));
 const knex = require("knex") ({
   client : "pg",
   connection : {
-  host : process.env.RDS_HOSTNAME || "awseb-e-jscipcpyz9-stack-awsebrdsdatabase-roat50cnm4ii.c7kgaykw042g.us-east-2.rds.amazonaws.com",
-  user : process.env.RDS_USERNAME || "dev-admins",
+  host : process.env.RDS_HOSTNAME || "awseb-e-dcpssqafyh-stack-awsebrdsdatabase-ofssl7nxdyot.cn6220qmsuba.us-east-1.rds.amazonaws.com",
+  user : process.env.RDS_USERNAME || "ebroot",
   password : process.env.RDS_PASSWORD || "Password123",
   database : process.env.RDS_DB_NAME || "ebdb",
   port : process.env.RDS_PORT || 5432,
@@ -32,7 +32,7 @@ app.use(express.json()); // CHECK LINE
 // Serve static files (e.g., CSS) if needed
 app.use(express.static('public'));
 // port number, (parameters) => what you want it to do.
-app.listen(PORT, () => console.log('Server started on port ' + PORT));
+
 
 // THIS COMES FROM THE ORIGINAL INDEX.JS FILE
 // Route to serve the form ------------------------------------------------------------------------------------------------
@@ -190,53 +190,51 @@ app.get('/login/reset-password', (req, res) => {
 // gets for userHome buttons $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 // UPCOMING ORDERED BY UNAPPROVED
+
 app.get('/view-upcoming-events', (req, res) => {
-  res.render('becomeSponsor');
+  knex('event')
+    .select(
+      'event.event_id',
+      'event.exp_total_attendance',
+      'event.exp_under_18',
+      'event.exp_over_18',
+      'event.suggested_team_count',
+      'event.first_datetime_pref',
+      'event.sec_datetime_pref',
+      'event.third_datetime_pref',
+      'event.selected_datetime',
+      'event.event_duration',
+      'event.jen_share_story', 
+      'event.event_type',
+      'event.exp_num_sew_machines',
+      'event.exp_num_serger_machines',
+      'event.event_street',
+      'event.event_city',
+      'event.event_state',
+      'event.event_zip',
+      'event.event_contact_first_name',
+      'event.event_contact_last_name',
+      'event.event_contact_email',
+      'event.event_contact_phone_num',
+      'event.pockets_produced',
+      'event.collars_produced',
+      'event.vests_produced',
+      'event.completed_products',
+      'event.approved_status',
+      'event.completed_status'
+    )
+    .where('completed_status', false)
+    .orderBy('first_datetime_pref', 'asc')
+    .then(event => {
+      // Render the upcomingevents.ejs template and pass the data
+      console.log('Query Result:', event);
+      res.render('viewUpcomingEvents', { event }); // pass security to this too. Check if it's true. If it is, render the buttons to perform the actions. 1st, go make a user table. 2nd, after you make the table, add a record. (you may need to be able to do this on an ejs file.) 3rd, pass the variable on this line to the ejs file then modify the ejs file.
+    })
+    .catch(error => {
+      console.error('Error querying database:', error);
+      res.status(500).send('Internal Server Error');
+    });
 });
-// app.get('/view-upcoming-events', (req, res) => {
-//   knex('event')
-//     .select(
-//       'event.event_id',
-//       'event.exp_total_attendance',
-//       'event.exp_under_18',
-//       'event.exp_over_18',
-//       'event.suggested_team_count',
-//       'event.first_datetime_pref',
-//       'event.sec_datetime_pref',
-//       'event.third_datetime_pref',
-//       'event.selected_datetime',
-//       'event.event_duration',
-//       'event.jen_share_story', 
-//       'event.event_type',
-//       'event.exp_num_sew_machines',
-//       'event.exp_num_serger_machines',
-//       'event.event_street',
-//       'event.event_city',
-//       'event.event_state',
-//       'event.event_zip',
-//       'event.event_contact_first_name',
-//       'event.event_contact_last_name',
-//       'event.event_contact_email',
-//       'event.event_contact_phone_num',
-//       'event.pockets_produced',
-//       'event.collars_produced',
-//       'event.vests_produced',
-//       'event.completed_products',
-//       'event.approved_status',
-//       'event.completed_status'
-//     )
-//     .where('completed_status', false)
-//     .orderBy('first_datetime_pref', 'asc')
-//     .then(event => {
-//       // Render the upcomingevents.ejs template and pass the data
-//       console.log('Query Result:', event);
-//       res.render('viewUpcomingEvents', { event }); // pass security to this too. Check if it's true. If it is, render the buttons to perform the actions. 1st, go make a user table. 2nd, after you make the table, add a record. (you may need to be able to do this on an ejs file.) 3rd, pass the variable on this line to the ejs file then modify the ejs file.
-//     })
-//     .catch(error => {
-//       console.error('Error querying database:', error);
-//       res.status(500).send('Internal Server Error');
-//     });
-// });
 
 // UPCOMING ORDERED BY DATE
 app.get('/view-upcoming-events-date', (req, res) => {
@@ -537,3 +535,15 @@ app.post('/submit-volunteer-form', async (req, res) => {
 });
 
 // ABOVE WORKS --------------------------------------------------------
+
+(async () => {
+  try {
+      const result = await knex.raw('SELECT 1+1 AS result'); // Simple query to test connection
+      console.log("Database connected successfully:", result.rows);
+  } catch (error) {
+      console.error("Database connection failed:", error.message);
+  }
+})();
+
+// PORT LISTENING-----------------------------------------------------------------------------
+app.listen(PORT, () => console.log('Server started on port ' + PORT));
