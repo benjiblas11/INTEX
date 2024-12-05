@@ -14,7 +14,8 @@ const knex = require("knex") ({
   password : process.env.RDS_PASSWORD || "iloveintex",
   database : process.env.RDS_DB_NAME || "ebdb",
   port : process.env.RDS_PORT || 5432,
-  ssl: process.env.DB_SSL ? { rejectUnauthorized: false } : false  // Fixed line
+  ssl: { require: true, rejectUnauthorized: false } // Fixed line
+  // ssl: process.env.DB_SSL ? {rejectUnauthorized: false } : false  // Fixed line
 }
 })
 app.set("views", path.join(__dirname, "views"));
@@ -32,7 +33,7 @@ app.use(express.json()); // CHECK LINE
 // Serve static files (e.g., CSS) if needed
 app.use(express.static('public'));
 // port number, (parameters) => what you want it to do.
-app.listen(PORT, () => console.log('Server started on port ' + PORT));
+
 
 // THIS COMES FROM THE ORIGINAL INDEX.JS FILE
 // Route to serve the form ------------------------------------------------------------------------------------------------
@@ -190,6 +191,7 @@ app.get('/login/reset-password', (req, res) => {
 // gets for userHome buttons $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 // UPCOMING ORDERED BY UNAPPROVED
+
 app.get('/view-upcoming-events', (req, res) => {
   knex('event')
     .select(
@@ -220,7 +222,7 @@ app.get('/view-upcoming-events', (req, res) => {
       'event.vests_produced',
       'event.completed_products',
       'event.approved_status',
-      'event.completed_status'
+      'event.confirmed_status'
     )
     .where('completed_status', false)
     .orderBy('first_datetime_pref', 'asc')
@@ -396,8 +398,7 @@ app.get('/view-volunteers', (req, res) => {
       'volunteer.vol_zip',
       'volunteer.referral_source',
       'volunteer.sewing_level',
-      'volunteer.willing_hours_per_month',
-      'volunteer.member_since'
+      'volunteer.willing_hours_per_month'
     )
 
     .then(volunteer => {
@@ -450,7 +451,7 @@ app.post('/admin-volunteer-form', async (req, res) => {
 app.get('/view-admins', (req, res) => {
   knex('admin')
     .select(
-      'admin.admin_id',
+      'admin.adminID',
       'admin.admin_first_name',
       'admin.admin_last_name',
       'admin.admin_email',
@@ -600,20 +601,6 @@ app.post('/register', async (req, res) => {
 // Routes for Login
 app.get('/login', (req, res) => res.render('login'));
 
-// app.post('/login', async (req, res) => {
-//     const { username, password } = req.body;
-//     try {
-//         const user = await db('users').where({ username }).first();
-//         if (!user) return res.status(400).send('User not found.');
-
-//         const isValid = await argon2.verify(user.hashed_password, password);
-//         if (isValid) res.send('Login successful!');
-//         else res.status(400).send('Invalid credentials.');
-//     } catch (err) {
-//         console.error(err);
-//         res.status(500).send('Error logging in.');
-//     }
-// });
 
 //ethans volunteer form 12/3
 // Route to serve the volunteer form
@@ -621,7 +608,7 @@ app.get('/volunteer-form', (req, res) => {
   res.render('volunteerForm'); // Ensure this matches the EJS file name (volunteerForm.ejs)
 });
 
-app.post('/submit-volunteer-form', async (req, res) => {
+app.post('/submit-volunteer-form', (req, res) => {
   const {
     vol_first_name,
     vol_last_name,
@@ -630,15 +617,13 @@ app.post('/submit-volunteer-form', async (req, res) => {
     vol_zip,
     referral_source,
     sewing_level,
-    willing_hours_per_month
+    
+    willing_hours_per_month,
+    member_since, // Include this field
   } = req.body;
 
-  try {
-    // Insert volunteer data into the database
-    await pool.query(
-      `INSERT INTO volunteers (vol_first_name, vol_last_name, vol_email, vol_phone_num, vol_zip, referral_source, sewing_level, willing_hours_per_month)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
-      [
+  knex('volunteers')
+    .insert({
         vol_first_name,
         vol_last_name,
         vol_email,
@@ -646,14 +631,30 @@ app.post('/submit-volunteer-form', async (req, res) => {
         vol_zip,
         referral_source,
         sewing_level,
-        willing_hours_per_month
-      ]
-    );
-    res.redirect('/'); // Redirect to landing page after submission
-  } catch (err) {
-    console.error('Error inserting volunteer data:', err);
-    res.status(500).send('Error processing your request.');
-  }
+        willing_hours_per_month,
+        member_since,
+    })
+    .then(() => {
+      // Redirect to the homepage after successful insertion
+      res.redirect('/');
+    })
+    .catch(error => {
+      console.error('Error inserting volunteer data:', error);
+      res.status(500).send('Internal Server Error');
+    });
 });
 
+
 // ABOVE WORKS --------------------------------------------------------
+
+(async () => {
+  try {
+      const result = await knex.raw('SELECT 1+1 AS result'); // Simple query to test connection
+      console.log("Database connected successfully:", result.rows);
+  } catch (error) {
+      console.error("Database connection failed:", error.message);
+  }
+})();
+
+// PORT LISTENING-----------------------------------------------------------------------------
+app.listen(PORT, () => console.log('Server started on port ' + PORT));
