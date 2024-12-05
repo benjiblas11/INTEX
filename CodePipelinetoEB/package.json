@@ -26,5 +26,9 @@
   },
   "devDependencies": {
     "mocha": "^10.8.2"
+  },
+  "directories": {
+    
+    "test": "tests"
   }
 }
