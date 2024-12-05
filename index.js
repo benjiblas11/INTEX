@@ -337,7 +337,8 @@ app.get('/view-volunteers', (req, res) => {
       'volunteer.vol_zip',
       'volunteer.referral_source',
       'volunteer.sewing_level',
-      'volunteer.willing_hours_per_month'
+      'volunteer.willing_hours_per_month',
+      'volunteer.member_since'
     )
 
     .then(volunteer => {
@@ -354,7 +355,7 @@ app.get('/view-volunteers', (req, res) => {
 app.get('/view-admins', (req, res) => {
   knex('admin')
     .select(
-      'admin.adminID',
+      'admin.admin_id',
       'admin.admin_first_name',
       'admin.admin_last_name',
       'admin.admin_email',
@@ -371,6 +372,12 @@ app.get('/view-admins', (req, res) => {
       console.error('Error querying database:', error);
       res.status(500).send('Internal Server Error');
     });
+});
+
+
+// 
+app.get('/addAdmin', (req, res) => {
+  res.render('addAdmin');
 });
 
 // POST for EDITS

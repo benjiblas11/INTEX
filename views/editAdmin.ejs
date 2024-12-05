@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Edit Character</title>
+  <title>Edit Admin</title>
   <style>
     form {
       width: 50%;
@@ -40,9 +40,9 @@
   </style>
 </head>
 <body>
-  <h1 style="text-align: center;">Edit Characters</h1>
+  <h1 style="text-align: center;">Edit Admins</h1>
 
-  <form action="/editCharacter/<%= characters.id %>" method="POST">   <!-- NOTE this is a editPoke method=POST -->
+  <form action="/editAdmin/<%= characters.id %>" method="POST">   <!-- NOTE this is a editPoke method=POST -->
     <!-- First Name -->
     <label for="first_name">First Name</label>
     <!-- NOTE line 49 has name='first_name'    CRITICAL FOR PARAM STUFF IN index.js--> 

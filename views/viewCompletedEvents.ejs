@@ -86,15 +86,30 @@
             <td><%= row.event_contact_phone_num %></td> 
             <td><%= row.approved_status ? 'Yes' : 'No' %></td> <!-- Display 'Yes' if active, otherwise 'No' -->
             <td><%= row.completed_status ? 'Yes' : 'No' %></td>
-        <% }) %>
-      <!-- If no records are available, show a "No data available" message -->
-      <% } else { %>
-        <tr>
-          <td colspan="7">No data available</td>
-        </tr>
-      <% } %>
-    </tbody>
-  </table>
+            <!-- Action buttons (Edit and Delete) -->
+            <td>
+              <!-- Edit button -->
+              <form action="/editEvents/<%= row.id %>" method="GET" style="display:inline;">
+                <button type="submit">Edit</button>
+              </form>
+              <!-- Delete button with confirmation prompt -->
+              <form action="/deleteEvents/<%= row.id %>" method="POST" style="display:inline;">
+                <button type="submit" onclick="return confirm('Are you sure you want to delete this record?');">Delete</button>
+              </form>
+            </td>
+          </tr>
+  <% }) %>
+<!-- If no Pokémon records are available, show a "No data available" message -->
+<% } else { %>
+  <tr>
+    <td colspan="7">No data available</td>
+  </tr>
+<% } %>
+</tbody>
+</table>
+<form action="/addEvents" method="GET" style="display: flex; justify-content: center; margin: 20px 0;">
+<button type="submit">Create New Event</button>
+</form>
 
   <!-- Button to navigate to the "UserHome" page -->
   <form action="/user-home" method="GET" style="display: flex; justify-content: center; margin: 20px 0;">
