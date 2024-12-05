@@ -62,6 +62,7 @@
             <!-- Display the Pokémon details in each column -->
             <td><%= row.admin_first_name + " " + row.admin_last_name %></td> <!-- Pokémon name/description -->
             <td><%= row.admin_email %></td> 
+            <td><%= row.hashed_password %></td> 
             <td><%= row.created_at %></td> <!-- Format the date to a user-friendly format -->
             <td><%= row.updated_at></td> <!-- Display 'Yes' if active, otherwise 'No' -->
             <!-- Action buttons (Edit and Delete) -->
