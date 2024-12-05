@@ -180,3 +180,281 @@ app.get('/donateForm', (req, res) => {
 app.get('/login/reset-password', (req, res) => {
   res.render('resetPassword');
 });
+
+// ABOVE WORKS -----------------------------------------------------------------------
+
+// gets for userHome buttons $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+// UPCOMING ORDERED BY UNAPPROVED
+app.get('/view-upcoming-events', (req, res) => {
+  knex('event')
+    .select(
+      'event.event_id',
+      'event.exp_total_attendance',
+      'event.exp_under_18',
+      'event.exp_over_18',
+      'event.suggested_team_count',
+      'event.first_datetime_pref',
+      'event.sec_datetime_pref',
+      'event.third_datetime_pref',
+      'event.selected_datetime',
+      'event.event_duration',
+      'event.jen_share_story', 
+      'event.event_type',
+      'event.exp_num_sew_machines',
+      'event.exp_num_serger_machines',
+      'event.event_street',
+      'event.event_city',
+      'event.event_state',
+      'event.event_zip',
+      'event.event_contact_first_name',
+      'event.event_contact_last_name',
+      'event.event_contact_email',
+      'event.event_contact_phone_num',
+      'event.pockets_produced',
+      'event.collars_produced',
+      'event.vests_produced',
+      'event.completed_products',
+      'event.approved_status',
+      'event.completed_status'
+    )
+    .where('completed_status', false)
+    .orderBy('first_datetime_pref', 'asc')
+    .then(event => {
+      // Render the upcomingevents.ejs template and pass the data
+      console.log('Query Result:', event);
+      res.render('viewUpcomingEvents', { event }); // pass security to this too. Check if it's true. If it is, render the buttons to perform the actions. 1st, go make a user table. 2nd, after you make the table, add a record. (you may need to be able to do this on an ejs file.) 3rd, pass the variable on this line to the ejs file then modify the ejs file.
+    })
+    .catch(error => {
+      console.error('Error querying database:', error);
+      res.status(500).send('Internal Server Error');
+    });
+});
+
+// UPCOMING ORDERED BY DATE
+app.get('/view-upcoming-events-date', (req, res) => {
+  knex('event')
+    .select(
+      'event.event_id',
+      'event.exp_total_attendance',
+      'event.exp_under_18',
+      'event.exp_over_18',
+      'event.suggested_team_count',
+      'event.first_datetime_pref',
+      'event.sec_datetime_pref',
+      'event.third_datetime_pref',
+      'event.selected_datetime',
+      'event.event_duration',
+      'event.jen_share_story', 
+      'event.event_type',
+      'event.exp_num_sew_machines',
+      'event.exp_num_serger_machines',
+      'event.event_street',
+      'event.event_city',
+      'event.event_state',
+      'event.event_zip',
+      'event.event_contact_first_name',
+      'event.event_contact_last_name',
+      'event.event_contact_email',
+      'event.event_contact_phone_num',
+      'event.pockets_produced',
+      'event.collars_produced',
+      'event.vests_produced',
+      'event.completed_products',
+      'event.approved_status',
+      'event.completed_status'
+    )
+    .where('completed_status', false)
+    .orderBy('first_datetime_pref', 'asc')
+    .then(event => {
+      // Render the upcomingevents.ejs template and pass the data
+      res.render('viewUpcomingEvents', { event }); // pass security to this too. Check if it's true. If it is, render the buttons to perform the actions. 1st, go make a user table. 2nd, after you make the table, add a record. (you may need to be able to do this on an ejs file.) 3rd, pass the variable on this line to the ejs file then modify the ejs file.
+    })
+    .catch(error => {
+      console.error('Error querying database:', error);
+      res.status(500).send('Internal Server Error');
+    });
+});
+
+// COMPLeted events BY earliest date
+app.get('/view-completed-events', (req, res) => {
+  // Logic to fetch and display approved events
+  knex('event')
+    .select(
+      'event.event_id',
+      'event.exp_total_attendance',
+      'event.exp_under_18',
+      'event.exp_over_18',
+      'event.suggested_team_count',
+      'event.first_datetime_pref',
+      'event.sec_datetime_pref',
+      'event.third_datetime_pref',
+      'event.selected_datetime',
+      'event.event_duration',
+      'event.jen_share_story', 
+      'event.event_type',
+      'event.exp_num_sew_machines',
+      'event.exp_num_serger_machines',
+      'event.event_street',
+      'event.event_city',
+      'event.event_state',
+      'event.event_zip',
+      'event.event_contact_first_name',
+      'event.event_contact_last_name',
+      'event.event_contact_email',
+      'event.event_contact_phone_num',
+      'event.pockets_produced',
+      'event.collars_produced',
+      'event.vests_produced',
+      'event.completed_products',
+      'event.approved_status',
+      'event.completed_status'
+    )
+    .where('completed_status', true)
+    .orderBy('selected_datetime', 'asc')
+    .then(event => {
+      // Render the upcomingevents.ejs template and pass the data
+      res.render('viewCompletedEvents', { event }); // pass security to this too. Check if it's true. If it is, render the buttons to perform the actions. 1st, go make a user table. 2nd, after you make the table, add a record. (you may need to be able to do this on an ejs file.) 3rd, pass the variable on this line to the ejs file then modify the ejs file.
+    })
+    .catch(error => {
+      console.error('Error querying database:', error);
+      res.status(500).send('Internal Server Error');
+    });
+});
+
+app.get('/view-volunteers', (req, res) => {
+  knex('volunteer')
+    .select(
+      'volunteer.volunteer_id',
+      'volunteer.vol_first_name',
+      'volunteer.vol_last_name',
+      'volunteer.vol_email',
+      'volunteer.vol_phone_num',
+      'volunteer.vol_zip',
+      'volunteer.referral_source',
+      'volunteer.sewing_level',
+      'volunteer.willing_hours_per_month'
+    )
+
+    .then(volunteer => {
+      // Render the viewVolunteers.ejs template and pass the data
+      res.render('viewVolunteers', { volunteer }); // pass security to this too. Check if it's true. If it is, render the buttons to perform the actions. 1st, go make a user table. 2nd, after you make the table, add a record. (you may need to be able to do this on an ejs file.) 3rd, pass the variable on this line to the ejs file then modify the ejs file.
+    })
+    .catch(error => {
+      console.error('Error querying database:', error);
+      res.status(500).send('Internal Server Error');
+    });
+});
+
+// view admin GET
+app.get('/view-admins', (req, res) => {
+  knex('admin')
+    .select(
+      'admin.adminID',
+      'admin.admin_first_name',
+      'admin.admin_last_name',
+      'admin.admin_email',
+      'admin.hashed_password',
+      'admin.created_at',
+      'admin.updated_at'
+    )
+
+    .then(admin => {
+      // Render the viewAdmins.ejs template and pass the data
+      res.render('viewAdmins', { admin }); // pass security to this too. Check if it's true. If it is, render the buttons to perform the actions. 1st, go make a user table. 2nd, after you make the table, add a record. (you may need to be able to do this on an ejs file.) 3rd, pass the variable on this line to the ejs file then modify the ejs file.
+    })
+    .catch(error => {
+      console.error('Error querying database:', error);
+      res.status(500).send('Internal Server Error');
+    });
+});
+
+// POST for EDITS
+//   the :id refers to the id record we passed in the editPoke.ejs form 
+app.post('/editCharacter/:id', (req, res) => {
+  const id = req.params.id;
+
+  // Access each value directly from req.body
+  const first_name = req.body.first_name; // SEE LINE 49 IN editPoke.ejs
+
+  const last_name = req.body.last_name; // 
+
+  const planet_name = parseInt(req.body.planet_name); //convert to int
+
+  // Since active_poke is a checkbox, its value is only sent when the checkbox is checked.
+
+  // If it is unchecked, no value is sent to the server.
+
+  // This behavior requires special handling on the server-side to set a default
+
+  // value for active_poke when it is not present in req.body.
+
+  const jedi = req.body.jedi === 'true'; // Convert checkbox value to boolean
+
+  const weapon= req.body.weapon;
+
+  // Update the Pokémon in the database
+  knex('characters')
+    .where('id', id)
+  //   the left side of : is the DB column name. the right side is the 
+    .update({
+      first_name: first_name,
+      last_name: last_name,
+      planet_name: planet_name,
+      jedi: jedi,
+      weapon: weapon,
+      
+    })
+    .then(() => {
+      res.redirect('/'); // Redirect to the home pageafter saving
+    })
+    .catch(error => {
+      console.error('Error updating character:', error);
+      res.status(500).send('Internal Server Error');
+    });
+});
+
+
+// the POST Template for ADD admins and event
+app.post('/addCharacter', (req, res) => {
+  // Extract form values from req.body
+  const first_name = req.body.first_name || ''; // Default to empty string if not provided
+  const last_name = req.body.last_name || '';
+  const planet_name = parseInt(req.body.planet_name, 10); // Convert to integer
+                          // const date_created = req.body.date_created || new Date().toISOString().split('T')[0]; // Default to today
+  const jedi = req.body.jedi === 'true'; // Checkbox returns true or undefined
+  const weapon= req.body.weapon|| 'N'; // Default to 'N' for None
+                              // const poke_type_id = parseInt(req.body.poke_type_id, 10); // Convert to integer
+  // Insert the new character into the database
+  knex('characters')
+    .insert({
+      first_name: first_name.toUpperCase(), // Ensure description is uppercase
+      last_name: last_name.toUpperCase(),
+      planet_name: planet_name,
+      jedi: jedi,
+      weapon: weapon,
+    })
+    .then(() => {
+      res.redirect('/'); // Redirect to the character list page after adding
+    })
+    .catch(error => {
+      console.error('Error adding Pokémon:', error);
+      res.status(500).send('Internal Server Error');
+    });
+});
+
+
+// template for the DELETE buttons
+app.post('/deleteCharacter/:id', (req, res) => {
+  const id = req.params.id;
+  knex('characters')
+    .where('id', id)
+    .del() // Deletes the record with the specified ID
+    .then(() => {
+      res.redirect('/'); // Redirect to the character list after deletion
+    })
+    .catch(error => {
+      console.error('Error deleting character:', error);
+      res.status(500).send('Internal Server Error');
+    });
+});
