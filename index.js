@@ -509,10 +509,10 @@ app.post('/submit-volunteer-form', (req, res) => {
     referral_source,
     sewing_level,
     willing_hours_per_month,
-    member_since, // Include this field
+    member_since,
   } = req.body;
 
-  knex('volunteers')
+  knex('volunteer')
     .insert({
         vol_first_name,
         vol_last_name,
@@ -525,8 +525,8 @@ app.post('/submit-volunteer-form', (req, res) => {
         member_since,
     })
     .then(() => {
-      // Redirect to the homepage after successful insertion
-      res.redirect('/');
+      // Redirect to the page with a success message parameter
+      res.redirect('/howucanhelp?success=true');
     })
     .catch(error => {
       console.error('Error inserting volunteer data:', error);
