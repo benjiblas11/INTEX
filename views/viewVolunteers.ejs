@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>View Volunteers</title>
+  <style>
+    /* Styles for the table displaying Pokémon records */
+    table {
+      width: 80%; /* Table width */
+      margin: 20px auto; /* Center table with margin */
+      border-collapse: collapse; /* Collapse table borders */
+      font-size: 10px; /* Reduce the font size of the table */
+    }
+
+    th, td {
+      border: 1px solid #ddd; /* Add a light border to table cells */
+      padding: 5px; /* Reduce the padding to decrease row height */
+      text-align: center; /* Center-align text in cells */
+      line-height: 1.2; /* Adjust line height for smaller rows */
+    }
+
+    th {
+      background-color: #F2F2F2; /* Set background color for header row */
+      font-weight: bold; /* Make header text bold */
+    }
+
+    button {
+      padding: 4px 8px; /* Adjust button size */
+      margin: 2px; /* Add small space between buttons */
+      font-size: 12px; /* Adjust button font size */
+      cursor: pointer; /* Change cursor to pointer on hover */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Title for Pokémon Records -->
+  <h1 style="text-align: center;">All Registered Volunteers</h1>
+
+  <!-- Table to display Pokémon records -->
+  <table>
+    <thead>
+      <tr>
+        <!-- Column headers for the table -->
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone Num</th>
+        <th>ZIP Code</th>
+        <th>Referral Source</th>
+        <th>Sewing Level</th>
+        <th>Willing Hours Per Month</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      
+
+      <!-- Check if there are Pokémon records to display -->
+      <% if (volunteer.length > 0) { %>
+        <!-- Loop through the Pokémon records and display each row -->
+        <% volunteer.forEach(row => { %>
+          <tr>
+            <!-- Hidden inputs for Pokémon ID and type ID (not used directly here, but could be useful in forms) -->
+            <input type="hidden" value="row.id">
+
+            <!-- Display the Pokémon details in each column -->
+            <td><%= row.vol_first_name + " " + row.vol_last_name %></td> <!-- Pokémon name/description -->
+            <td><%= row.vol_email %></td> 
+            <td><%= row.vol_phone_num %></td> <!-- Format the date to a user-friendly format -->
+            <td><%= row.vol_zip %></td> <!-- Display 'Yes' if active, otherwise 'No' -->
+            <td><%= row.referral_source %></td> <!-- Display gender -->
+            <td><%= row.sewing_level %></td>
+            <td><%= row.willing_hours_per_month %></td> <!-- Display type description -->
+
+            <!-- Action buttons (Edit and Delete) -->
+            <td>
+              <!-- Edit button -->
+              <form action="/editPoke/<%= row.id %>" method="GET" style="display:inline;">
+                <button type="submit">Edit</button>
+              </form>
+              <!-- Delete button with confirmation prompt -->
+              <form action="/deletePoke/<%= row.id %>" method="POST" style="display:inline;">
+                <button type="submit" onclick="return confirm('Are you sure you want to delete this record?');">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      <!-- If no Pokémon records are available, show a "No data available" message -->
+      <% } else { %>
+        <tr>
+          <td colspan="7">No data available</td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+
+  <!-- Button to navigate to the "UserHome" page -->
+  <form action="/user-home" method="GET" style="display: flex; justify-content: center; margin: 20px 0;">
+    <button type="submit">Back to Admin Dashboard</button>
+  </form>
+</body>
+</html>

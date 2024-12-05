@@ -1,0 +1,1114 @@
+:root {
+  --teal: #008080;
+  --teal-light: #00b3b3;
+  --teal-medium: #68b596;
+  --teal-blue: #85d8d8;
+  --teal-background: #abf2f2;
+}
+
+.btn-outline-teal {
+  background-color: white;
+  color: var(--teal);
+  border: 2px solid var(--teal);
+  margin: 10px; /* Increase spacing between buttons */
+  padding: 5px 10px; /* Add more padding to make buttons larger */
+  border-radius: 8px; /* Rounded corners */
+  flex: 1; /* Ensures buttons take equal space in the row */
+  text-align: center; /* Centers text inside the button */
+  font-size: 1.1em; /* Slightly increase text size */
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.btn-teal {
+  background-color: var(--teal); /* Default teal background */
+  color: white; /* Default white text */
+  border: 2px solid var(--teal); /* Teal border */
+  padding: 15px 30px; /* Larger button size */
+  border-radius: 12px; /* Rounded corners */
+  font-size: 1.2em; /* Larger text size */
+  cursor: pointer; /* Changes mouse cursor to a pointer (hand icon) */
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+  text-align: center; /* Ensures text is centered */
+  display: inline-block; /* Allows margin and padding to work properly */
+}
+
+.btn-teal:hover {
+  background-color: white; /* Background turns white */
+  color: var(--teal); /* Text turns teal */
+  border: 2px solid var(--teal); /* Border remains teal */
+}
+
+
+.text-teal {
+  color: var(--teal);
+}
+
+/* Turtle Vest Section */
+.turtle-vest-section {
+  background: linear-gradient(to bottom right, #f9f9f9, #ffffff); /* Modern gradient background */
+  padding: 40px 20px; /* Spacious padding */
+  border-radius: 12px; /* Subtle rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add depth with shadow */
+  max-width: 1200px; /* Limit width for better readability */
+  margin: 40px auto; /* Center align and add spacing */
+}
+
+.turtle-vest-content {
+  text-align: center; /* Center-align text */
+  color: #333; /* Neutral color for text */
+  line-height: 1.8; /* Improve text readability */
+}
+
+.vest-title {
+  font-size: 2.2em; /* Larger and bolder title */
+  color: var(--teal); /* Use the teal color for the title */
+  margin-bottom: 20px; /* Space under the title */
+}
+
+.vest-intro {
+  font-size: 1.2em; /* Slightly larger introductory text */
+  color: #555; /* Subtle gray for intro text */
+  margin-bottom: 10px;
+}
+
+.vest-description {
+  font-size: 1.1em;
+  font-style: italic; /* Add emphasis to description */
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.vest-help-title {
+  font-size: 1.8em;
+  color: #333;
+  font-weight: bold;
+  margin: 30px 0 15px;
+}
+
+.vest-story {
+  font-size: 1.1em;
+  color: #444;
+  margin-bottom: 15px;
+}
+
+.vest-solution {
+  font-size: 1.1em;
+  color: #444;
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+.vest-call-to-action {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+
+
+
+.hero {
+  background-image: url('/images/TurtleHeader.jpg'); /* Path to your image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh; /* Adjust height as needed */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  padding: 20px;
+  position: relative; /* Necessary for the overlay pseudo-element */
+  z-index: 1; /* Ensure hero content is above the overlay */
+}
+
+.hero::before {
+  content: ''; /* Pseudo-element for the overlay */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Gray filter with 50% opacity */
+  z-index: -1; /* Place the overlay behind the hero content */
+}
+
+.hero h1 {
+  font-size: 3em; /* Adjust font size */
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+
+.hero a {
+  background-color: #00b894; /* Button color */
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 1.2em;
+}
+
+/* Optional: Add hover effect to the button */
+.hero a:hover {
+  background-color: #007f65; /* Darker green on hover */
+}
+
+
+.form-container h2 {
+  color: var(--teal);
+  font-size: 1.8em;
+  margin-bottom: 15px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+/* Ensure all form labels are left-aligned */
+.form-group label {
+  display: block;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-align: left; /* Left-align the labels */
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--teal);
+  box-shadow: 0px 0px 5px rgba(0, 128, 128, 0.5); /* Teal focus glow */
+  outline: none;
+}
+
+.form-group small {
+  font-size: 0.85em;
+  color: #666;
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.form-check input {
+  margin-right: 10px;
+}
+
+.form-check label {
+  font-size: 1em;
+  color: #333;
+}
+
+.btn-submit {
+  background-color: var(--teal);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-submit:hover {
+  background-color: var(--teal-light);
+  transform: translateY(-2px); /* Subtle hover effect */
+}
+
+.btn-submit:active {
+  transform: translateY(0); /* Reset on click */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .form-container {
+      padding: 15px;
+  }
+
+  .social-img {
+      width: 30px; /* Smaller size for mobile screens */
+      height: 30px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+      font-size: 0.9em;
+  }
+
+  .btn-submit {
+      font-size: 0.9em;
+  }
+}
+
+
+/* Form card in the center */
+.form-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Slightly deeper shadow for elevation */
+  width: 100%;
+  max-width: 600px; /* Restrict maximum width */
+  padding: 30px;
+  margin: 20px; /* Adds spacing for smaller screens */
+  text-align: center;
+}
+
+/* Centering the form heading */
+.form-card h2 {
+  color: var(--teal);
+  font-size: 1.8em;
+  margin-bottom: 20px;
+}
+
+
+/* Adjust radio button group labels for alignment */
+.radio-btn-group {
+  display: flex;
+  justify-content: flex-start; /* Align the group to the left */
+  gap: 10px; /* Add spacing between the buttons */
+}
+
+.radio-btn-group label {
+  background-color: white;
+  color: var(--teal);
+  border: 2px solid var(--teal);
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.3s ease;
+  font-size: 1.1em;
+  margin: 0; /* Ensure consistent alignment */
+}
+
+/* Hover effect for the radio button labels */
+.radio-btn-group label:hover {
+  background-color: var(--teal-light); /* Change background to teal-light */
+  color: white; /* Change text color to white */
+  border-color: var(--teal-light); /* Change border color to teal-light */
+  transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+  transform: translateY(-3px); /* Add slight lift effect */
+}
+
+.radio-btn-group input[type="radio"] {
+  display: none; /* Hide the original radio buttons */
+}
+
+/* Style for the selected radio button */
+.radio-btn-group input[type="radio"]:checked + label {
+  background-color: var(--teal);
+  color: white;
+  border-color: var(--teal-light);
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between; /* Space between logo and nav items */
+  align-items: center; /* Aligns items vertically */
+  width: 100%; /* Ensures the container spans the full width */
+  padding: 0; /* Remove inner padding */
+  margin: 0; /* Remove any potential default margins */
+}
+
+.navbar-logo {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
+  margin: 0;
+  text-decoration: none;
+}
+
+.nav-items {
+  list-style: none; /* Removes bullet points */
+  display: flex; /* Aligns nav items horizontally */
+  margin: 0; /* Removes default margin */
+  padding: 0; /* Removes default padding */
+  justify-content: flex-end; /* Aligns nav items to the right */
+  flex-grow: 1; /* Pushes nav items to the far right */
+  gap: 10px; /* Adds spacing between buttons */
+}
+
+.nav-item {
+  margin: 0; /* Removes extra margins */
+}
+
+.nav-link {
+  text-decoration: none;
+  color: white;
+  padding: 10px 15px; /* Adds spacing inside each button */
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  display: block; /* Ensures the links behave as block elements */
+  border-radius: 12px; /* Adds rounded corners on hover */
+}
+
+.nav-link:hover {
+  background-color: var(--teal-light); /* Changes background color on hover */
+  border-radius: 12px; /* Adds rounded corners on hover */
+}
+
+/* Ensure the login button is touching the far-right edge */
+.nav-item:last-child .nav-link {
+  margin-right: 0; /* Removes any margin on the right for the last item */
+}
+
+
+/* Dropdown */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-btn {
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #222;
+  list-style: none;
+  padding: 10px 0;
+  margin: 0;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  width: 200px;
+  text-align: left;
+  border-radius: 5px;
+}
+
+.dropdown-menu li {
+  margin: 0;
+}
+
+.dropdown-menu a {
+  text-decoration: none;
+  color: white;
+  display: block;
+  padding: 10px 15px;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-menu a:hover {
+  background-color: #333;
+  color: var(--teal-light);
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar-container {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .nav-items {
+      flex-direction: column;
+      width: 100%;
+      text-align: center;
+  }
+
+  .dropdown-menu {
+      width: 100%;
+      left: 0;
+  }
+}
+
+.bg-teal2 {
+  background: url('/images/getinvolved.jpg') no-repeat center center;
+  background-size: 120%; /* Zoom in the background image slightly */
+  background-attachment: fixed; /* Keeps the image in place during scrolling (parallax effect) */
+  min-height: 100vh; /* Ensure the full height of the viewport */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  padding: 20px; /* Add some padding for spacing */
+  position: relative; /* Set up for the overlay */
+  margin: 0; /* Remove default margin that may cause gaps */
+  width: 100%; /* Ensure it stretches to fill the full width */
+}
+
+.bg-teal2::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Dark overlay with 50% opacity */
+  pointer-events: none; /* Ensure overlay doesn’t block interaction */
+  z-index: 1; /* Place overlay above the background */
+}
+
+.bg-teal2 > * {
+  position: relative;
+  z-index: 2; /* Ensure content appears above the overlay */
+}
+
+
+.bg-teal {
+  background-color: var(--teal);
+  min-height: auto; /* Removes the forced full-screen height */
+  padding: 10px 20px; /* Add consistent padding for spacing */
+}
+
+/* Image Box for JensStory */
+.image-box {
+  position: relative; /* Enable positioning for the pseudo-element */
+  width: 100%; /* Full width of the page */
+  height: 300px; /* Set a fixed height for horizontal cropping */
+  overflow: hidden; /* Ensures the cropped parts are not visible */
+}
+
+.image-box img {
+  width: 100%; /* Make the image responsive */
+  height: 100%; /* Ensure it fills the container height */
+  object-fit: cover; /* Crops the image while keeping the aspect ratio */
+  display: block; /* Remove inline spacing */
+}
+
+/* Gray Filter Overlay */
+.image-box::before {
+  content: ''; /* Create the overlay */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Gray filter with 50% opacity */
+  z-index: 1; /* Place the filter on top of the image */
+  pointer-events: none; /* Allow clicks to pass through */
+}
+
+.image-box .bottom-text {
+  position: absolute; /* Position relative to the .image-box */
+  bottom: 10px; /* Place the text 10px from the bottom */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Adjust to center */
+  color: white; /* Text color */
+  padding: 10px 15px; /* Add padding for readability */
+  border-radius: 5px; /* Optional: Rounded corners */
+  font-size: 1em; /* Adjust font size as needed */
+  font-family: 'Arial', sans-serif; /* Optional: Font style */
+  text-decoration: none; /* Remove underline */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover effect */
+}
+
+.image-box .bottom-text:hover {
+  background-color: rgba(0, 0, 0, 0.8); /* Darker background on hover */
+  color: #00b894; /* Change text color on hover */
+  text-decoration: underline; /* Add underline on hover */
+}
+
+
+/* Image and Text Wrapper */
+.image-text-wrapper {
+  display: block; /* Use block layout for better wrapping behavior */
+  margin-bottom: 30px; /* Add space below the wrapper */
+}
+
+/* Image Styles */
+.image-text-wrapper img {
+  float: left; /* Align image to the left */
+  margin-right: 20px; /* Add space between the image and text */
+  margin-bottom: 10px; /* Add space below the image for aesthetics */
+  width: 40%; /* Adjust image width */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 5px; /* Optional: Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add shadow */
+}
+
+/* Text Styles */
+.image-text-wrapper p {
+  font-family: 'Georgia', serif; /* Use a serif font like Georgia for a classic look */
+  font-size: 1.2em; /* Adjust size to match */
+  line-height: 1.8; /* Improve readability with extra line spacing */
+  color: #555; /* Use a softer gray for the text color */
+  text-align: justify; /* Ensure the text is justified for clean alignment */
+  margin-bottom: 20px; /* Add space between paragraphs */
+}
+
+/* Page Container Jens Story */
+.page-container {
+  max-width: 1200px; /* Set maximum width for the content */
+  margin: 0 auto; /* Center the container */
+  padding: 20px; /* Add inner spacing */
+  background-color: #fff; /* Optional: White background if needed */
+}
+
+/* Ensure Text and Images Stay Inside the Container Jens Story */
+.page-container .image-text-wrapper {
+  margin-top: 50px;
+  margin-bottom: 30px; /* Add space below each section */
+}
+
+/* Page Title Styling Jen's Story */
+.page-title {
+  font-family: 'Georgia', serif;
+  font-size: 2.5em; /* Adjust size as needed */
+  font-weight: bold; /* Make it stand out */
+  text-align: left; /* Center the text */
+  margin-left: 0px;
+  margin-bottom: 20px; /* Add space between title and the content below */
+  margin-top: 100px;
+  color: #555; /* Use a softer gray for the text color */
+}
+
+/* Clickable text Jen's Story */
+/* Clickable Text Container Styling */
+.clickable-text-container {
+  text-align: center; /* Center the text horizontally */
+  margin-top: 30px; /* Add space above the text */
+  margin-bottom: 50px; /* Add space below the text */
+}
+
+/* Clickable Text Styling */
+.clickable-text {
+  font-family: 'Georgia', serif; /* Use a serif font like Georgia for a classic look */
+  font-size: 1.2em; /* Adjust font size */
+  color: #00b894; /* Teal color */
+  text-decoration: none; /* Remove underline */
+  font-weight: bold; /* Make the text bold */
+  font-style: italic; /* Italicize the text to match the style */
+  transition: color 0.3s ease; /* Smooth hover transition */
+}
+
+/* Hover Effect */
+.clickable-text:hover {
+  color: #009974; /* Darker teal color on hover */
+  text-decoration: underline; /* Underline the text on hover */
+}
+
+
+input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="number"]:focus {
+  border-color: var(--teal);
+  box-shadow: 0px 0px 5px rgba(0, 128, 128, 0.5);
+  outline: none;
+}
+
+
+.footer {
+  padding: 20px 0; /* Adds padding to the footer */
+  background-color: #333; /* Dark gray background */
+  color: white; /* White text color */
+  font-size: 0.9em; /* Adjusts font size for better readability */
+}
+
+.footer-container {
+  display: flex; /* Flexbox for horizontal layout */
+  justify-content: space-between; /* Evenly space the sections */
+  align-items: center; /* Align items vertically */
+  max-width: 1200px; /* Limit the maximum width */
+  margin: 0 auto; /* Center the container */
+  padding: 0 20px; /* Add padding inside the container */
+}
+
+.footer-info {
+  display: flex;
+  flex-direction: column; /* Stack text vertically */
+  text-align: left; /* Align text to the left */
+}
+
+.footer-contact {
+  text-align: center; /* Center-align contact info */
+}
+
+.footer-social {
+  display: flex;
+  gap: 30px; /* Add spacing between icons */
+  align-items: center; /* Aligns icons vertically */
+  justify-content: center; /* Centers icons horizontally */
+}
+
+.footer-phone,
+.footer-email {
+  color: var(--teal-blue); /* Teal light color for links */
+  text-decoration: none; /* Remove underline */
+  font-weight: bold; /* Make it stand out */
+  transition: color 0.3s ease, transform 0.2s ease; /* Smooth hover effect */
+}
+
+.footer-phone:hover,
+.footer-email:hover {
+  color: white; /* White text color on hover */
+  transform: translateY(-3px); /* Lift effect on hover */
+}
+
+
+.footer-email:hover {
+  text-decoration: underline; /* Add underline on hover */
+  color: var(--teal); /* Change color on hover */
+}
+
+/* Social Media Buttons */
+.social-icon {
+  font-size: 2.4em; /* Icon size */
+  text-align: center; /* Center icon */
+  color: var(--teal-light); /* Set icon color */
+  transition: color 0.3s ease, transform 0.2s ease; /* Smooth hover effect */
+  background: none; /* Remove background */
+  border-radius: 0; /* Remove circular shape */
+  padding: 0; /* Remove padding */
+}
+
+.social-icon:hover {
+  color: var(--teal-light); /* Change icon color on hover */
+  transform: translateY(-3px); /* Add lift effect */
+}
+
+
+
+/* Social Images */
+.social-img {
+  width: 40px; /* Icon size */
+  height: 40px;
+  object-fit: contain;
+  transition: filter 0.3s ease, transform 0.3s ease; /* Smooth hover effects */
+  filter: brightness(0) saturate(100%) invert(60%) sepia(100%) saturate(200%) hue-rotate(143deg) brightness(120%) contrast(100%);
+}
+
+
+.social-icon:hover .social-img {
+  filter: brightness(0) saturate(100%) invert(100%) brightness(100%) contrast(100%);
+  transform: scale(1.2); /* Enlarge slightly on hover */
+}
+
+.help-boxes-container {
+  display: grid; /* Use grid layout */
+  grid-template-columns: repeat(2, 1fr); /* Two columns */
+  gap: 20px; /* Add space between boxes */
+  justify-content: center; /* Center the grid */
+  align-items: stretch; /* Make boxes the same height */
+  padding: 20px;
+  max-width: 1200px; /* Limit container width */
+  margin: 0 auto; /* Center the container */
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 768px) {
+  .help-boxes-container {
+      grid-template-columns: 1fr; /* Single column for smaller screens */
+  }
+}
+
+/* Individual Help Boxes */
+.help-box {
+  display: flex; /* Use flexbox */
+  flex-direction: column; /* Stack items vertically */
+  justify-content: space-between; /* Push content apart */
+  align-items: center; /* Center items horizontally */
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  height: 100%; /* Ensure all boxes are the same height */
+}
+
+
+/* Headings in Help Boxes */
+.help-box h3 {
+  font-size: 1.5em;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Descriptions in Help Boxes */
+.help-box p {
+  font-size: 1em;
+  color: #555;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+/* Hover Effects for Help Boxes */
+.help-box:hover {
+  transform: translateY(-5px); /* Slight lift on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+}
+
+/* Learn More Button Inside Help Boxes */
+.help-box .learn-more-btn {
+  background-color: var(--teal); /* Teal color for the button */
+  color: white; /* White text color */
+  border: none; /* Remove border */
+  padding: 10px 15px; /* Add padding for button size */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 1em; /* Standard font size */
+  font-weight: bold; /* Bold text */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+  margin-top: 10px; /* Add space above the button */
+  display: inline-block; /* Inline block for proper spacing */
+  text-align: center; /* Center text inside the button */
+  text-decoration: none; /* Remove underline */
+}
+
+/* Hover Effect for the Button */
+.help-box .learn-more-btn:hover {
+  background-color: var(--teal-light); /* Lighter teal on hover */
+  transform: translateY(-2px); /* Slight lift on hover */
+}
+
+
+
+.btn-hero-match {
+  background-color: #00b894; /* Match Hero button background */
+  color: white; /* Match Hero button text color */
+  padding: 10px 20px; /* Match Hero button size */
+  text-decoration: none; /* Remove underline */
+  border-radius: 5px; /* Match rounded corners */
+  font-size: 1.2em; /* Match Hero font size */
+  display: inline-block; /* Match Hero button layout */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Match Hero hover effects */
+}
+
+.btn-hero-match:hover {
+  background-color: #007f65; /* Match Hero hover color */
+  transform: translateY(-2px); /* Match Hero lift on hover */
+}
+
+/* DonateMain Page */
+.donation-section {
+  margin: 2rem auto;
+  padding: 1rem 2rem;
+  text-align: center;
+  max-width: 800px; /* Constrain width for better readability */
+  color: #4a4a4a; /* Neutral text color */
+  font-family: 'Georgia', serif;
+  line-height: 1.8; /* Improve readability */
+}
+
+.donation-section a {
+  color: #ffffff; /* Highlight links */
+  text-decoration: none; /* Remove underline */
+  font-weight: bold;
+}
+
+.donation-section h3 {
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #4a4a4a;
+}
+
+.donate-button-container {
+  margin-top: 2rem; /* Add spacing above the button */
+}
+
+.donate-button {
+  display: inline-block;
+  background-color: #00b894; /* Button background color */
+  color: white; /* Button text color */
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  text-transform: uppercase;
+  text-decoration: none; /* Remove underline */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.donate-button:hover {
+  background-color: #333; /* Slightly lighter black on hover */
+  transform: scale(1.05); /* Subtle zoom effect */
+}
+
+
+/* Styling for the containers */
+.info-box {
+  background-color: #f9f9f9; /* Light background for the card */
+  border: 1px solid #ddd; /* Subtle border for separation */
+  border-radius: 8px; /* Rounded corners for the card */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
+  padding: 20px; /* Add padding inside the card */
+  text-align: center; /* Center text content */
+  margin-bottom: 20px; /* Add spacing between rows on smaller screens */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effects */
+}
+
+/* Center the cards on the page */
+.row {
+  justify-content: center; /* Centers the row content horizontally */
+  gap: 15px; /* Adds space between the cards */
+}
+
+/* Hover effect for the cards */
+.info-box:hover {
+  transform: translateY(-5px); /* Slight lift effect */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+/* Styling for the titles inside the cards */
+.info-title {
+  font-size: 1.2rem; /* Slightly larger text for emphasis */
+  font-weight: bold; /* Bold font for title */
+  margin-bottom: 10px; /* Spacing below the title */
+  color: var(--teal); /* Teal color for title text */
+}
+
+/* Styling for the text inside the cards */
+.info-text {
+  font-size: 0.9rem; /* Smaller font size for supporting text */
+  color: #555; /* Subtle gray for secondary text */
+  margin-bottom: 20px; /* Spacing below the text */
+}
+
+/* Styling for the buttons inside the cards */
+.info-box .btn {
+  font-size: 0.8rem; /* Reduce font size to make the button smaller */
+  padding: 5px 10px; /* Adjust padding for a smaller button */
+  border-radius: 4px; /* Slightly rounded corners */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effects */
+}
+
+/* Hover effect for buttons */
+.info-box .btn:hover {
+  background-color: var(--teal-light); /* Lighter teal on hover */
+  transform: scale(1.1); /* Slight zoom effect */
+  color: white; /* Ensure text is white on hover */
+}
+
+
+/* Side Menu */
+.side-menu {
+  padding: 15px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+/* Content Area */
+.content-area {
+  padding-left: 20px;
+}
+
+/* Containers Section */
+.containers-section .info-box {
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.containers-section .info-box h3 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.containers-section .info-box .small-btn {
+  font-size: 0.9em;
+  padding: 5px 10px;
+}
+
+
+
+
+/* Image Section Styling */
+.image-section {
+  position: relative; /* Ensures flexibility for future content overlays */
+  width: 100%; /* Full width for the section */
+  height: auto; /* Adjusts to image content naturally */
+  margin-top: 20px; /* Adds spacing above the image */
+}
+
+/* Full-Screen Image Styling */
+.full-screen-image {
+  width: 100%; /* Ensures the image spans the full width of the viewport */
+  height: auto; /* Maintains the aspect ratio */
+  object-fit: cover; /* Ensures the image covers the section area proportionally */
+  display: block; /* Removes inline spacing artifacts */
+  border-radius: 8px; /* Optional: Add rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow for depth */
+}
+
+.donation-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+}
+
+.donation-container h1 {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.donation-steps {
+  margin: 20px 0;
+}
+
+.donation-step {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 15px;
+  margin: 10px 0;
+  background: white;
+  transition: transform 0.2s ease;
+}
+
+.donation-step:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.donation-step.active {
+  border: 2px solid var(--teal);
+}
+
+.donation-step h2 {
+  font-size: 1.2em;
+  color: var(--teal);
+  margin-bottom: 10px;
+}
+
+.donation-step p {
+  color: #555;
+  font-size: 0.9em;
+}
+
+.donation-step input {
+  width: 90%; /* Adjusts the width to fit inside the container */
+  max-width: 400px; /* Sets a maximum width for larger screens */
+  padding: 10px; /* Adds padding inside the input field */
+  margin: 10px auto; /* Centers the input field inside the container */
+  border: 1px solid #ccc; /* Sets a light border */
+  border-radius: 4px; /* Adds rounded corners */
+  font-size: 1em; /* Ensures readable font size */
+  box-sizing: border-box; /* Ensures padding and borders are included in width calculation */
+  display: block; /* Ensures it respects margin and centers */
+}
+
+.continue-btn {
+  background-color: var(--teal);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 1em;
+  cursor: pointer;
+  text-decoration: none; /* Removes underline */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+
+.continue-btn:hover {
+  background-color: var(--teal-light);
+  transform: translateY(-2px);
+}
+
+.donation-footer {
+  margin-top: 20px;
+  font-size: 0.9em;
+  color: #555;
+}
+
+/* General container styling for each section */
+section {
+  display: flex; /* Use flexbox for alignment */
+  align-items: center; /* Vertically center content */
+  justify-content: space-between; /* Add spacing between image and text */
+  gap: 20px; /* Space between image and text container */
+  padding: 20px; /* Add padding inside each section */
+  border: 1px solid #ccc; /* Add border for containerized look */
+  border-radius: 8px; /* Rounded corners for a modern look */
+  background-color: #f9f9f9; /* Light background color */
+  margin-bottom: 20px; /* Space between sections */
+  max-width: 1200px; /* Limit width of each section */
+  margin-left: auto; /* Center align container */
+  margin-right: auto; /* Center align container */
+}
+
+/* Styling for the image */
+.section-image {
+  flex: 0 0 40%; /* Image takes 40% of the section width */
+  max-width: 40%; /* Maintain max width */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: cover; /* Ensure proper scaling */
+  border-radius: 8px; /* Rounded edges for a polished look */
+}
+
+/* Styling for text container */
+section > div:nth-child(2) {
+  flex: 1; /* Allow text to take up remaining space */
+  display: flex;
+  flex-direction: column; /* Stack heading, paragraph, and button */
+  justify-content: center; /* Vertically center content */
+  padding: 10px; /* Add padding around text */
+}
+
+/* Styling for section headings */
+section h2 {
+  font-size: 1.8em; /* Larger font size for emphasis */
+  margin-bottom: 10px; /* Space below heading */
+  color: var(--teal); /* Match with your color scheme */
+}
+
+/* Styling for section paragraphs */
+section p {
+  font-size: 1.1em; /* Adjust font size for readability */
+  margin-bottom: 15px; /* Space below paragraph */
+  line-height: 1.6; /* Increase line height for better readability */
+  color: #333; /* Neutral text color */
+}
+
+/* Styling for buttons */
+section a.btn {
+  align-self: flex-start; /* Align button to the start */
+  padding: 10px 20px; /* Add padding for a clickable button */
+  font-size: 1em; /* Button font size */
+  text-decoration: none; /* Remove underline */
+  border-radius: 4px; /* Rounded edges for modern look */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+}
+
+/* Button hover effect */
+section a.btn:hover {
+  background-color: var(--teal-light); /* Change color on hover */
+  transform: translateY(-3px); /* Slight lift effect on hover */
+}
