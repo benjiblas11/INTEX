@@ -26,12 +26,18 @@
                     .replace(/\b\w/g, char => char.toUpperCase()); // Capitalize the first letter of each word
                 }
               
-                document.querySelector('form').addEventListener('submit', function(event) {
+                document.addEventListener('DOMContentLoaded', () => {
                   const firstNameInput = document.getElementById('vol_first_name');
                   const lastNameInput = document.getElementById('vol_last_name');
               
-                  firstNameInput.value = toProperCase(firstNameInput.value);
-                  lastNameInput.value = toProperCase(lastNameInput.value);
+                  // Immediately apply proper case on input
+                  firstNameInput.addEventListener('input', () => {
+                    firstNameInput.value = toProperCase(firstNameInput.value);
+                  });
+              
+                  lastNameInput.addEventListener('input', () => {
+                    lastNameInput.value = toProperCase(lastNameInput.value);
+                  });
                 });
               </script>              
 

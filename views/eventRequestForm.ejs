@@ -20,13 +20,13 @@
         <div class="form-group">
             <label>Type of Event:</label>
             <div class="radio-btn-group">
-                <input type="radio" id="sewing_event" name="event_type" value="sewing" required>
+                <input type="radio" id="sewing_event" name="event_type" value="Sewing" required>
                 <label for="sewing_event">Sewing</label>
         
-                <input type="radio" id="nonsewing_event" name="event_type" value="nonsewing" required>
+                <input type="radio" id="nonsewing_event" name="event_type" value="Non-Sewing" required>
                 <label for="nonsewing_event">Non-Sewing</label>
         
-                <input type="radio" id="both_event" name="event_type" value="both" required>
+                <input type="radio" id="both_event" name="event_type" value="Both" required>
                 <label for="both_event">Both</label>
             </div>
         </div>
@@ -130,6 +130,28 @@
             <label for="event_contact_last_name">Contact Last Name:</label>
             <input type="text" id="event_contact_last_name" name="event_contact_last_name" class="form-control" autocomplete="family-name" required>
         </div>
+
+        <script>
+            function toProperCase(value) {
+              return value.replace(/\w\S*/g, (txt) =>
+                txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase()
+              );
+            }
+          
+            document.addEventListener('DOMContentLoaded', () => {
+              const firstNameInput = document.getElementById('event_contact_first_name');
+              const lastNameInput = document.getElementById('event_contact_last_name');
+          
+              firstNameInput.addEventListener('input', () => {
+                firstNameInput.value = toProperCase(firstNameInput.value);
+              });
+          
+              lastNameInput.addEventListener('input', () => {
+                lastNameInput.value = toProperCase(lastNameInput.value);
+              });
+            });
+          </script>
+          
         <div class="form-group">
             <label for="event_contact_phone_num">Contact Phone Number:</label>
             <input 

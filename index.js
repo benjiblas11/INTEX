@@ -66,7 +66,6 @@ app.post('/submit-event-request', (req, res) => {
   const event_city = req.body.event_city;
   const event_state = req.body.event_state;
   const event_zip = req.body.event_zip;
-  const event_additional_info = req.body.event_additional_info || null; // Optional field
   const jen_share_story = req.body.jen_share_story === 'true'; // Convert checkbox value to boolean
   const exp_num_sew_machines = parseInt(req.body.exp_num_sew_machines);
   const exp_num_serger_machines = parseInt(req.body.exp_num_serger_machines);
@@ -76,20 +75,32 @@ app.post('/submit-event-request', (req, res) => {
   const event_contact_last_name = req.body.event_contact_last_name;
   const event_contact_phone_num = req.body.event_contact_phone_num;
   const event_contact_email = req.body.event_contact_email;
+  const suggested_team_count = parseInt(req.body.suggested_team_count) || 0;
+  const total_attendance = parseInt(req.body.total_attendance) || 0;
+  const selected_datetime = req.body.selected_datetime;
+  const pockets_produced = parseInt(req.body.pockets_produced) || 0;
+  const collars_produced = parseInt(req.body.collars_produced) || 0;
+  const vests_produced = parseInt(req.body.vests_produced) || 0;
+  const completed_products = parseInt(req.body.completed_products) || 0;
+  const add_info = req.body.add_info || null;
+
   // Insert the event into the database
   knex('event')
     .insert({
       exp_total_attendance: exp_total_attendance,
+      suggested_team_count: suggested_team_count,
+      total_attendance: total_attendance,
       event_type: event_type,
       first_datetime_pref: first_datetime_pref,
       sec_datetime_pref: sec_datetime_pref,
       third_datetime_pref: third_datetime_pref,
+      selected_datetime: selected_datetime,
       event_duration: event_duration,
+      event_type: event_type,
       event_street: event_street,
       event_city: event_city,
       event_state: event_state,
       event_zip: event_zip,
-      event_additional_info: event_additional_info,
       jen_share_story: jen_share_story,
       exp_num_sew_machines: exp_num_sew_machines,
       exp_num_serger_machines: exp_num_serger_machines,
@@ -99,11 +110,16 @@ app.post('/submit-event-request', (req, res) => {
       event_contact_last_name: event_contact_last_name,
       event_contact_phone_num: event_contact_phone_num,
       event_contact_email: event_contact_email,
+      pockets_produced: pockets_produced,
+      collars_produced: collars_produced,
+      vests_produced: vests_produced,
+      completed_products: completed_products,
+      add_info: add_info,
       approved_status: false, // Default value
-      completed_status: false // Default value
+      confirmed_status: false // Default value
     })
     .then(() => {
-      res.redirect('/success'); // Redirect to a success page
+      res.redirect('/howucanhelp'); // Redirect to a success page
     })
     .catch(error => {
       console.error('Error submitting event request:', error);
