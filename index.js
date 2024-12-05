@@ -9,9 +9,9 @@ app.use(express.urlencoded( {extended: true} ));
 const knex = require("knex") ({
   client : "pg",
   connection : {
-  host : process.env.RDS_HOSTNAME || "awseb-e-dcpssqafyh-stack-awsebrdsdatabase-ofssl7nxdyot.cn6220qmsuba.us-east-1.rds.amazonaws.com",
-  user : process.env.RDS_USERNAME || "ebroot",
-  password : process.env.RDS_PASSWORD || "iloveintex",
+  host : process.env.RDS_HOSTNAME || "awseb-e-jscipcpyz9-stack-awsebrdsdatabase-roat50cnm4ii.c7kgaykw042g.us-east-2.rds.amazonaws.com",
+  user : process.env.RDS_USERNAME || "dev-admins",
+  password : process.env.RDS_PASSWORD || "Password123",
   database : process.env.RDS_DB_NAME || "ebdb",
   port : process.env.RDS_PORT || 5432,
   ssl: process.env.DB_SSL ? { rejectUnauthorized: false } : false  // Fixed line
@@ -493,20 +493,6 @@ app.post('/register', async (req, res) => {
 // Routes for Login
 app.get('/login', (req, res) => res.render('login'));
 
-// app.post('/login', async (req, res) => {
-//     const { username, password } = req.body;
-//     try {
-//         const user = await db('users').where({ username }).first();
-//         if (!user) return res.status(400).send('User not found.');
-
-//         const isValid = await argon2.verify(user.hashed_password, password);
-//         if (isValid) res.send('Login successful!');
-//         else res.status(400).send('Invalid credentials.');
-//     } catch (err) {
-//         console.error(err);
-//         res.status(500).send('Error logging in.');
-//     }
-// });
 
 //ethans volunteer form 12/3
 // Route to serve the volunteer form
@@ -540,6 +526,7 @@ app.post('/submit-volunteer-form', async (req, res) => {
         referral_source,
         sewing_level,
         willing_hours_per_month,
+        member_since,
       ]
     );
     res.redirect('/'); // Redirect to landing page after submission
