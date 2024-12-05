@@ -458,3 +458,86 @@ app.post('/deleteCharacter/:id', (req, res) => {
       res.status(500).send('Internal Server Error');
     });
 });
+
+// ABOVE WORKS ----------------------------------------------------------------------------------
+
+// REGISTER / LOGIN / PASSWORD ------------------------------------------------------------------------------------------------
+
+// Routes for Register
+app.get('/register', (req, res) => res.render('register'));
+
+app.post('/register', async (req, res) => {
+    const { first_name, last_name, username, password } = req.body;
+    try {
+        const hashedPassword = await argon2.hash(password);
+        await db('users').insert({
+            first_name,
+            last_name,
+            username,
+            hashed_password: hashedPassword,
+        });
+        res.send('Registration successful!');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error registering user.');
+    }
+});
+
+// Routes for Login
+app.get('/login', (req, res) => res.render('login'));
+
+// app.post('/login', async (req, res) => {
+//     const { username, password } = req.body;
+//     try {
+//         const user = await db('users').where({ username }).first();
+//         if (!user) return res.status(400).send('User not found.');
+
+//         const isValid = await argon2.verify(user.hashed_password, password);
+//         if (isValid) res.send('Login successful!');
+//         else res.status(400).send('Invalid credentials.');
+//     } catch (err) {
+//         console.error(err);
+//         res.status(500).send('Error logging in.');
+//     }
+// });
+
+//ethans volunteer form 12/3
+// Route to serve the volunteer form
+app.get('/volunteer-form', (req, res) => {
+  res.render('volunteerForm'); // Ensure this matches the EJS file name (volunteerForm.ejs)
+});
+
+app.post('/submit-volunteer-form', async (req, res) => {
+  const {
+    vol_first_name,
+    vol_last_name,
+    vol_email,
+    vol_phone_num,
+    vol_zip,
+    referral_source,
+    sewing_level,
+    willing_hours_per_month,
+  } = req.body;
+
+  try {
+    // Insert volunteer data into the database
+    await pool.query(
+      `INSERT INTO volunteers (vol_first_name, vol_last_name, vol_email, vol_phone_num, vol_zip, referral_source, sewing_level, willing_hours_per_month)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
+      [
+        vol_first_name,
+        vol_last_name,
+        vol_email,
+        vol_phone_num,
+        vol_zip,
+        referral_source,
+        sewing_level,
+        willing_hours_per_month,
+      ]
+    );
+    res.redirect('/'); // Redirect to landing page after submission
+  } catch (err) {
+    console.error('Error inserting volunteer data:', err);
+    res.status(500).send('Error processing your request.');
+  }
+});
