@@ -29,3 +29,19 @@ app.get('/', (req, res) => {
 app.use(express.static('public'));
 // port number, (parameters) => what you want it to do.
 app.listen(PORT, () => console.log('Server started on port ' + PORT));
+
+// THIS COMES FROM THE ORIGINAL INDEX.JS FILE
+// Route to serve the form ------------------------------------------------------------------------------------------------
+app.get('/event-request', (req, res) => {
+  res.render('eventRequestForm');
+});
+
+// Route to about page ------------------------------------------------------------------------------------------------
+app.get('/about', (req, res) => {
+  res.render('about');
+});
+
+// Route to homelessness info page ------------------------------------------------------------------------------------------------
+app.get('/homeless', (req, res) => {
+  res.render('homeless');
+});
