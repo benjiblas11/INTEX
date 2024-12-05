@@ -109,6 +109,7 @@ app.post('/submit-event-request', (req, res) => {
 
 //poop
 
+
 //ABOVE WORKS --------------------------------------------
 
 // Route to Jens Story Page
@@ -135,4 +136,47 @@ res.redirect('/user-home');
 
 app.get('/user-home', (req, res) => {
 res.render('userHome'); // Renders userHome.ejs
+});
+
+// ABOVE WORKS -------------------------------------------------
+
+// end of gets for userHome buttons
+
+// thank u sponsors!!
+app.get('/thank-you-to-our-sponsors', (req, res) => {
+  // Logic to fetch and display volunteers
+  res.render('thankYouToOurSponsors');
+});
+
+// volunteer landing page
+app.get('/volunteer-main', (req, res) => {
+  // Logic to fetch and display volunteers
+  res.render('volunteerMain');
+});
+
+// Route to donation landing page
+app.get('/donateMain', (req, res) => {
+  res.render('donateMain');
+});
+
+// route for becoming sponsor or partner
+app.get('/become-sponsor', (req, res) => {
+  res.render('becomeSponsor');
+});
+
+// route for requesting event main page
+app.get('/event-request-main', (req, res) => {
+  res.render('eventRequestMain');
+});
+
+
+// route to donation form
+app.get('/donateForm', (req, res) => {
+  res.render('donateForm');
+});
+
+
+//route for resetting admin passcode
+app.get('/login/reset-password', (req, res) => {
+  res.render('resetPassword');
 });
