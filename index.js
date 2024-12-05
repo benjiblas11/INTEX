@@ -1,7 +1,7 @@
 let express = require('express');
 let app = express();
 let path = require('path');
-const argon2 = require('argon2');
+// const argon2 = require('argon2');
 const PORT = process.env.PORT || 3000
 // grab html form from file 
 // allows to pull JSON data from form 
@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
 app.use(express.static('public'));
 // port number, (parameters) => what you want it to do.
 // BENJI ADDED THIS
-app.use(express.json());
+// app.use(express.json());
 
 //-----------------------------------------------------------------------------------------------------------------------
 
