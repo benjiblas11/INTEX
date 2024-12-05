@@ -512,8 +512,8 @@ app.post('/submit-volunteer-form', async (req, res) => {
   try {
     // Insert volunteer data into the database
     await pool.query(
-      `INSERT INTO volunteers (vol_first_name, vol_last_name, vol_email, vol_phone_num, vol_zip, referral_source, sewing_level, willing_hours_per_month)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
+      `INSERT INTO volunteers (vol_first_name, vol_last_name, vol_email, vol_phone_num, vol_zip, referral_source, sewing_level, willing_hours_per_month, member_since)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
       [
         vol_first_name,
         vol_last_name,
