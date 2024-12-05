@@ -100,7 +100,7 @@ app.post('/submit-event-request', (req, res) => {
       event_contact_phone_num: event_contact_phone_num,
       event_contact_email: event_contact_email,
       approved_status: false, // Default value
-      completed_status: false // Default value
+      confirmed_status: false // Default value
     })
     .then(() => {
       res.redirect('/success'); // Redirect to a success page
@@ -197,6 +197,7 @@ app.get('/view-upcoming-events', (req, res) => {
     .select(
       'event.event_id',
       'event.exp_total_attendance',
+      'event.total_attendance',
       'event.exp_under_18',
       'event.exp_over_18',
       'event.suggested_team_count',
@@ -243,6 +244,7 @@ app.get('/view-upcoming-events-date', (req, res) => {
     .select(
       'event.event_id',
       'event.exp_total_attendance',
+      'event.total_attendance',
       'event.exp_under_18',
       'event.exp_over_18',
       'event.suggested_team_count',
@@ -289,6 +291,7 @@ app.get('/view-completed-events', (req, res) => {
     .select(
       'event.event_id',
       'event.exp_total_attendance',
+      'event.total_attendance',
       'event.exp_under_18',
       'event.exp_over_18',
       'event.suggested_team_count',
@@ -376,7 +379,7 @@ app.post('/admin-event-request', (req, res) => {
       event_contact_phone_num: event_contact_phone_num,
       event_contact_email: event_contact_email,
       approved_status: false, // Default value
-      completed_status: false // Default value
+      confirmed_status: false // Default value
     })
     .then(() => {
       res.redirect('/view-upcoming-events-date'); // Redirect to a success page
