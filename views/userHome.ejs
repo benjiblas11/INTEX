@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            background: var(--teal-background); /* Teal background from variable */
+            color: #2d3436;
+        }
+    
+        /* Sidebar Styles */
+        .sidebar {
+            background-color: var(--teal); /* Teal background from variable */
+            width: 250px;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .sidebar h1 {
+            font-size: 1.6rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+        .sidebar .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .sidebar .action-buttons a, .sidebar .action-buttons button {
+            color: #ffffff;
+            background: var(--teal-light); /* Lighter teal for button background */
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-size: 1rem;
+            text-decoration: none;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
+        }
+        .sidebar .action-buttons a:hover, .sidebar .action-buttons button:hover {
+            background: var(--teal); /* Darker teal for hover */
+            transform: translateY(-2px); /* Lift the button on hover */
+        }
+        .sidebar .action-buttons a:active, .sidebar .action-buttons button:active {
+            transform: translateY(1px); /* Slight depression effect when clicked */
+        }
+    
+        footer {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #b2bec3;
+            text-align: center;
+        }
+        footer a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    
+        /* Main Content */
+        .main-content {
+            flex-grow: 1;
+            background: #ffffff;
+            padding: 30px;
+            margin-left: 250px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+        }
+        .main-content h2 {
+            color: var(--teal); /* Teal text color */
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .main-content p {
+            font-size: 1.1rem;
+            color: #636e72;
+            margin-bottom: 20px;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="sidebar">
+        <h1>Admin Panel</h1>
+        <div class="action-buttons">
+            <form action="/view-upcoming-events" method="GET" style="display: inline;">
+                <button type="submit" class="button">View Upcoming Events</button>
+            </form>
+            
+            <form action="/view-completed-events" method="GET" style="display: inline;">
+                <button type="submit" class="button">View Completed Events</button>
+            </form>
+            
+            <form action="/view-volunteers" method="GET" style="display: inline;">
+                <button type="submit" class="button">View Volunteers</button>
+            </form>
+            
+            <form action="/view-admins" method="GET" style="display: inline;">
+                <button type="submit" class="button">View Admins</button>
+            </form>
+        </div>
+        
+        <footer>
+            Powered by <a href="https://turtleshell.is404.com">Turtle Shell Project</a>.
+        </footer>
+    </div>
+    <div class="main-content">
+        <h2>Welcome to the Admin Dashboard</h2>
+        <p>Manage your events, volunteers, and admin tasks with ease.</p>
+        <!-- Future dashboard content will go here -->
+    </div>
+</body>
+</html>
