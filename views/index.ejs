@@ -3,15 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Welcome to Example App</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Turtle Shelter Project</title>
+    <!-- Bootstrap CSS -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
-    <div class="container">
-        <h1>Congratulations!</h1>
-        <p>You successfully created your Elastic Beanstalk App Deployed from CodePipline!</p>
-        <button class="cta-button">Get Started</button>
+ <!-- Navbar -->
+ <nav class="navbar bg-teal">
+    <div class="navbar-container">
+        <a href="/" class="navbar-logo">Turtle Shell Project</a>
+        <ul class="nav-items">
+            <li class="nav-item"><a href="/jensstory" class="nav-link">Jen's Story</a></li>
+            <li class="nav-item"><a href="thank-you-to-our-sponsors" class="nav-link">Thank You to Our Sponsors</a></li>
+            <li class="dropdown nav-item">
+                <a href="/about" class="dropdown-btn nav-link">About</a>
+                <ul class="dropdown-menu">
+                    <li><a href="/homeless">Homelessness and Hypothermia</a></li>
+                    <li><a href="/about">Our Tech</a></li>
+                </ul>
+                </li>
+            <li class="dropdown nav-item">
+                <a href="/howucanhelp" class="dropdown-btn nav-link">How You Can Help</a>
+                <ul class="dropdown-menu">
+                    <li><a href="/howucanhelp">You Can Make a Difference</a></li>
+                    <li><a href="/donateMain">Donate</a></li>
+                    <li><a href="/event-request-main">Schedule Your Own Event</a></li>
+                    <li><a href="/become-sponsor">Become a Partner or Sponsor</a></li>
+                    <li><a href="/volunteer-main">Become a Volunteer</a></li>
+                </ul>
+                </li>
+            <li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
+            </ul>
+        </div>
+</nav>
+    <!-- Hero Section -->
+<div class="hero">
+    <div class="overlay">
+        <div class="container">
+            <p class="lead">Helping to save lives of people exeriencing homelessness</p>
+            <h1>Starts With You</h1>
+            <a href="#about" class="continue-btn">Learn More</a>
+        </div>
     </div>
+</div>
+<!-- Turtle Shelter Vest Section -->
+<div class="turtle-vest-section">
+    <div class="turtle-vest-content">
+        <h2 class="vest-title">What is a Turtle Shelter Vest?</h2>
+        <p class="vest-intro">A high-tech but simple solution to help save lives:</p>
+        <p class="vest-description">A portable "shelter" you can carry with you, just like a turtle...</p>
+        <h3 class="vest-help-title">And You Can Help!</h3>
+        <p class="vest-story">
+            One winter when Jen was homeless, 7 of her friends froze to death.
+        </p>
+        <p class="vest-solution">
+            Jen is no longer homeless and has figured out a solution:
+            High-tech foam vests that are inexpensive,
+            keep a person warm to 10 degrees below zero, help save lives,
+            and alleviate suffering.
+        </p>
+        <p class="vest-call-to-action">
+            YOU can request vests for your community—or make vests with your
+            friends, colleagues, church members, or club to help save lives.
+        </p>
+        <!-- <a href="/howucanhelp" class="btn-hero-match">Learn How to Help</a> -->
+    </div>
+</div>
+    <!-- Main Content -->
+    <main class="container my-5">
+        <!-- About Section -->
+        <section id="about">
+            <div style="width: 300px;">
+                <img src="/images/TurtleProjectLogo.png" alt="About"
+                style="width: 100%; height: auto;">
+            </div>
+            <div>
+                <h2>About</h2>
+                <p>
+                    Jen's story, from homelessness to saving lives, plus our mission, team, and all about the tech that makes our vests so special.
+                </p>
+                <div>
+                    <a href="/about" class="continue-btn">Learn More</a>
+                </div>
+            </div>
+        </section>
+        <!-- Take Action Section -->
+        <section id="take-action" style="display: flex; align-items: flex-start; margin-bottom: 20px;">
+            <div div style="width: 300px;">
+                <img src="/images/getinvolved.jpg" alt="Take Action"
+                style="width: 100%; height: auto; max-width: 100%;">
+            </div>
+            <div style="flex: 1;">
+                <h2 style="margin: 0;">Take Action</h2>
+                <p style="margin: 10px 0;">
+                    Ready to take the next step? You can request vests, donate, make vests yourself, or organize an event!
+                </p>
+                <div>
+                    <a href="/howucanhelp" class="continue-btn">Learn More</a>
+                </div>
+            </div>
+        </section>
+        <!-- Donate Section -->
+        <section id="donate" style="display: flex; align-items: flex-start; margin-bottom: 20px;">
+            <div div style="width: 300px;">
+                <img src="/images/homelessfriends.jpg" alt="Donate"
+                style="width: 100%; height: auto; max-width: 100%;">
+            </div>
+            <div style="flex: 1;">
+                <h2 style="margin: 0;">Donate</h2>
+                <p style="margin: 10px 0;">
+                    Your support can help save lives.
+                </p>
+                <div>
+                    <a href="/donateMain" class="continue-btn">Learn More</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- FOOTER -->
+    <footer class="footer bg-dark text-white">
+        <div class="footer-container">
+            <!-- Footer Info -->
+            <div class="footer-info">
+                <p>&copy; Turtle Shelter Project</p>
+                <p>PO Box 382, Kaysville, UT 84037</p>
+            </div>
+            <!-- Footer Email -->
+            <div class="footer-contact">
+                <p><a href="tel:8018723190" class="footer-phone">(801) 872-3190</a></p>
+                <p><a href="mailto:turtleshelterproject@gmail.com" class="footer-phone">turtleshelterproject@gmail.com</a></p>
+            </div>
+            <!-- Social Media -->
+            <div class="footer-social">
+                <a href="https://www.facebook.com/turtleshelterproject" target="_blank" class="social-icon">
+                    <img src="/images/facebook.png" alt="Facebook Icon" class="social-img">
+                </a>
+                <a href="https://www.instagram.com/turtleshelterproject/" target="_blank" class="social-icon">
+                    <img src="/images/instagram.png" alt="Instagram Icon" class="social-img">
+                </a>
+            </div>
+        </div>
+    </footer>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
