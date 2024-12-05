@@ -1,88 +1,91 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Edit Admin</title>
-  <style>
-    form {
-      width: 50%;
-      margin: 20px auto;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      background-color: #F9F9F9;
-      font-size: 12px;
-    }
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: bold;
-    }
-    input, select, button {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    input[type="checkbox"], input[type="radio"] {
-      width: auto;
-      margin-right: 5px;
-    }
-    button {
-      background-color: #4CAF50;
-      color: white;
-      font-size: 12px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #45A049;
-    }
-  </style>
+  <link rel="stylesheet" href="/styles.css"> <!-- Link to your CSS file -->
 </head>
 <body>
-  <h1 style="text-align: center;">Edit Admins</h1>
+  <h1>Edit Admin</h1>
+  <form action="/editAdmin/<%= admin.id %>" method="POST">
+    <!-- Admin First Name -->
+    <div>
+      <label for="admin_first_name">First Name:</label>
+      <input 
+        type="text" 
+        id="admin_first_name" 
+        name="admin_first_name" 
+        value="<%= admin.admin_first_name %>" 
+        required 
+        placeholder="Enter first name"
+      >
+    </div>
 
-  <form action="/editAdmin/<%= characters.id %>" method="POST">   <!-- NOTE this is a editPoke method=POST -->
-    <!-- First Name -->
-    <label for="first_name">First Name</label>
-    <!-- NOTE line 49 has name='first_name'    CRITICAL FOR PARAM STUFF IN index.js--> 
-    <input type="text" id="first_name" name="first_name" value="<%= characters.first_name %>" required oninput="this.value = this.value.toUpperCase()">
+    <!-- Admin Last Name -->
+    <div>
+      <label for="admin_last_name">Last Name:</label>
+      <input 
+        type="text" 
+        id="admin_last_name" 
+        name="admin_last_name" 
+        value="<%= admin.admin_last_name %>" 
+        required 
+        placeholder="Enter last name"
+      >
+    </div>
 
-    <!-- Last Name -->
-    <label for="last_name">Last Name</label>
-    <input type="text" id="last_name" name="last_name" value="<%= characters.last_name %>" required oninput="this.value = this.value.toUpperCase()">
+    <!-- Admin Email -->
+    <div>
+      <label for="admin_email">Email:</label>
+      <input 
+        type="email" 
+        id="admin_email" 
+        name="admin_email" 
+        value="<%= admin.admin_email %>" 
+        required 
+        placeholder="Enter email address"
+      >
+    </div>
 
-   <!-- Planets-->
-   <label for="planet_name">Planets</label>
-   <select id="planet_name" name="planet_name">
-       <!-- this is a cool forEach loop to give the option list all the planets -->
-     <% planets.forEach(type => { %>
-       <option value="<%= planet.id %>" <%= characters.planet_name === planet.id ? 'selected' : '' %>>
-         <%= planet.planet_name %>
-       </option>
-     <% }) %>
-   </select>
+    <!-- Admin Password -->
+    <div>
+      <label for="hashed_password">Password:</label>
+      <input 
+        type="password" 
+        id="hashed_password" 
+        name="hashed_password" 
+        required 
+        placeholder="Enter new password"
+      >
+    </div>
 
-    <!-- is jedi (Checkbox) -->
-    <label for="jedi">
-      <input type="checkbox" id="jedi" name="jedi" value="true" <%= characters.jedi ? 'checked' : '' %>>
-      Active Characters
-    </label>
+    <!-- Created At -->
+    <div>
+      <label for="created_at">Created At:</label>
+      <input 
+        type="date" 
+        id="created_at" 
+        name="created_at" 
+        value="<%= admin.created_at.toISOString().split('T')[0] %>" 
+      >
+    </div>
 
-    <!-- Weapons -->
-    <label>Preferred Weapon</label>
-    <label>
-      <input type="radio" name="weapon" value="L" <%= characters.weapon === 'L' ? 'checked' : '' %>> LIGHTSABER
-    </label>
-    <label>
-      <input type="radio" name="weapon" value="B" <%= characters.weapon === 'B' ? 'checked' : '' %>> BLASTER
-    </label>
-    <label>
-      <input type="radio" name="weapon" value="N" <%= characters.weapon === 'N' ? 'checked' : '' %>> NONE
-    </label>
+    <!-- Updated At -->
+    <div>
+      <label for="updated_at">Updated At:</label>
+      <input 
+        type="date" 
+        id="updated_at" 
+        name="updated_at" 
+        value="<%= admin.updated_at.toISOString().split('T')[0] %>" 
+      >
+    </div>
 
     <!-- Submit Button -->
-    <button type="submit">Save Changes</button>
+    <div>
+      <button type="submit" class="button">Update Admin</button>
+    </div>
   </form>
 </body>
 </html>
