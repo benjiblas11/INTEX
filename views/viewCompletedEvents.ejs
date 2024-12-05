@@ -41,22 +41,27 @@
       <tr>
         <!-- Column headers for the table -->
         <th>Total Expected Attendance</th>
+        <th>Total Attendance</th>
         <th>Expected Attendance (Minors)</th>
         <th>Expected Attendance (Adults)</th>
-        <th>Suggested Team Members</th>
-        <th>1st Date Preference</th>
-        <th>2nd Date Preference</th>
-        <th>3rd Date Preference</th>
+        <th>Total Team Count</th>
+        <th>Selected Date & Time</th>
         <th>Event Duration</th>
         <th>Share Story</th>
         <th>Event Type</th>
-        <th>Expected Number of Sewing Machines</th>
-        <th>Expected Number of Serger Machines</th>
+        <th>Number of Sewing Machines</th>
+        <th>Number of Serger Machines</th>
         <th>Event Address</th>
         <th>Contact Name</th>
         <th>Email</th>
         <th>Phone Number</th>
+        <th>Pockets Produced</th>
+        <th>Collars Produced</th>
+        <th>Vests Produced</th>
+        <th>Completed Products</th>
         <th>Approved Status</th>
+        <th>Confirmed Status</th>
+        <th>Edit / Delete</th>
       </tr>
     </thead>
     <tbody>
@@ -70,12 +75,11 @@
             
             <!-- Display the Pokémon details in each column -->
             <td><%= row.exp_total_attendance %></td>
+            <td><%= row.total_attendance %></td>
             <td><%= row.exp_under_18 %></td> 
             <td><%= row.exp_over_18 %></td> 
             <td><%= row.suggested_team_count %></td>
-            <td><%= row.first_datetime_pref %></td> 
-            <td><%= row.sec_datetime_pref %></td> 
-            <td><%= row.third_datetime_pref %></td> 
+            <td><%= row.selected_datetime %></td>  
             <td><%= row.jen_share_story %></td>
             <td><%= row.event_type %></td> 
             <td><%= row.exp_num_sew_machines %></td> 
@@ -84,6 +88,10 @@
             <td><%= row.event_contact_first_name + ", " + row.event_contact_last_name %></td> 
             <td><%= row.event_contact_email %></td> 
             <td><%= row.event_contact_phone_num %></td> 
+            <td><%= row.pockets_produced %></td> 
+            <td><%= row.collars_produced %></td>
+            <td><%= row.vests_produced %></td>
+            <td><%= row.completed_products %></td>
             <td><%= row.approved_status ? 'Yes' : 'No' %></td> <!-- Display 'Yes' if active, otherwise 'No' -->
             <td><%= row.completed_status ? 'Yes' : 'No' %></td>
             <!-- Action buttons (Edit and Delete) -->

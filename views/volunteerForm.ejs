@@ -18,14 +18,52 @@
                 <label for="vol_last_name">Last Name</label>
                 <input type="text" id="vol_last_name" name="vol_last_name" required>
             </div>
+
+            <script>
+                function toProperCase(text) {
+                  return text
+                    .toLowerCase()
+                    .replace(/\b\w/g, char => char.toUpperCase()); // Capitalize the first letter of each word
+                }
+              
+                document.querySelector('form').addEventListener('submit', function(event) {
+                  const firstNameInput = document.getElementById('vol_first_name');
+                  const lastNameInput = document.getElementById('vol_last_name');
+              
+                  firstNameInput.value = toProperCase(firstNameInput.value);
+                  lastNameInput.value = toProperCase(lastNameInput.value);
+                });
+              </script>              
+
             <div class="form-group">
                 <label for="vol_email">Email Address</label>
                 <input type="email" id="vol_email" name="vol_email" required>
             </div>
             <div class="form-group">
                 <label for="vol_phone_num">Phone Number</label>
-                <input type="text" id="vol_phone_num" name="vol_phone_num" required>
+                <input type="tel" id="vol_phone_num" name="vol_phone_num" placeholder="(123) 123-1234" maxlength="14" class="form-control" autocomplete="tel" required>
             </div>
+
+            <script>
+                const phoneInput = document.getElementById('vol_phone_num');
+            
+                phoneInput.addEventListener('input', (e) => {
+                let value = e.target.value.replace(/\D/g, ''); // Remove all non-numeric characters
+                if (value.length > 10) value = value.slice(0, 10); // Limit to 10 digits
+            
+                // Format the input as (123) 123-1234
+                if (value.length > 6) {
+                    value = `(${value.slice(0, 3)}) ${value.slice(3, 6)}-${value.slice(6)}`;
+                } else if (value.length > 3) {
+                    value = `(${value.slice(0, 3)}) ${value.slice(3)}`;
+                } else if (value.length > 0) {
+                    value = `(${value}`;
+                }
+            
+                e.target.value = value; // Update the input field with the formatted value
+                });
+            </script>
+
             <div class="form-group">
                 <label for="vol_zip">Zip Code</label>
                 <input type="text" id="vol_zip" name="vol_zip" required>
@@ -34,11 +72,11 @@
                 <label for="referral_source">How Did You Hear About Us?</label>
                 <select id="referral_source" name="referral_source">
                     <option value="" selected disabled>Select an option</option>
-                    <option value="friend">Friend</option>
-                    <option value="facebook">Facebook</option>
-                    <option value="referral">Referral</option>
-                    <option value="website">Website</option>
-                    <option value="event">Event</option>
+                    <option value="Friend">Friend</option>
+                    <option value="Facebook">Facebook</option>
+                    <option value="Referral">Referral</option>
+                    <option value="Website">Website</option>
+                    <option value="Event">Event</option>
                 </select>
             </div>
             <div class="form-group">
@@ -47,7 +85,7 @@
                     <option value="" selected disabled>Select an option</option>
                     <option value="Beginner">Beginner</option>
                     <option value="Intermediate">Intermediate</option>
-                    <option value="Advanced">Advanced</option>
+                    <option value="Experienced">Experienced</option>
                 </select>
             </div>
             <div class="form-group">

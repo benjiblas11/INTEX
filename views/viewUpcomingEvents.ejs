@@ -57,6 +57,8 @@
         <th>Email</th>
         <th>Phone Number</th>
         <th>Approved Status</th>
+        <th>Confirmed Status</th>
+        <th>Edit / Delete</th>
       </tr>
     </thead>
     <tbody>
@@ -76,6 +78,7 @@
             <td><%= row.first_datetime_pref %></td> 
             <td><%= row.sec_datetime_pref %></td> 
             <td><%= row.third_datetime_pref %></td> 
+            <td><%= row.event_duration %></td> 
             <td><%= row.jen_share_story %></td>
             <td><%= row.event_type %></td> 
             <td><%= row.exp_num_sew_machines %></td> 
@@ -85,8 +88,8 @@
             <td><%= row.event_contact_email %></td> 
             <td><%= row.event_contact_phone_num %></td> 
             <td><%= row.approved_status ? 'Yes' : 'No' %></td> <!-- Display 'Yes' if active, otherwise 'No' -->
-            <td><%= row.completed_status ? 'Yes' : 'No' %></td>
-
+            <td><%= row.confirmed_status ? 'Yes' : 'No' %></td>
+            
             <td>
               <!-- each form is a submit button with action  -->
                
@@ -104,7 +107,7 @@
 
           </tr>
         <% }) %>
-      <!-- If no Pokémon records are available, show a "No data available" message -->
+      <!-- If no records are available, show a "No data available" message -->
       <% } else { %>
         <tr>
           <td colspan="7">No data available</td>
@@ -112,9 +115,11 @@
       <% } %>
     </tbody>
   </table>
+
   <form action="/addEvents" method="GET" style="display: flex; justify-content: center; margin: 20px 0;">
     <button type="submit">Create New Event</button>
   </form>
+  
   <!-- Button to navigate to the "UserHome" page -->
   <form action="/user-home" method="GET" style="display: flex; justify-content: center; margin: 20px 0;">
     <button type="submit">Back to Admin Dashboard</button>
