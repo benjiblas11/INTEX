@@ -1,1 +1,1 @@
-# INTEX
+# CodePipeline to Elastic Beanstalk
