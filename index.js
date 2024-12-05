@@ -498,7 +498,7 @@ app.get('/volunteer-form', (req, res) => {
   res.render('volunteerForm'); // Ensure this matches the EJS file name (volunteerForm.ejs)
 });
 
-app.post('/submit-volunteer-form', async (req, res) => {
+app.post('/submit-volunteer-form', (req, res) => {
   const {
     vol_first_name,
     vol_last_name,
@@ -508,31 +508,31 @@ app.post('/submit-volunteer-form', async (req, res) => {
     referral_source,
     sewing_level,
     willing_hours_per_month,
+    member_since, // Include this field
   } = req.body;
 
-  try {
-    // Insert volunteer data into the database
-    await pool.query(
-      `INSERT INTO volunteers (vol_first_name, vol_last_name, vol_email, vol_phone_num, vol_zip, referral_source, sewing_level, willing_hours_per_month, member_since)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
-      [
-        vol_first_name,
-        vol_last_name,
-        vol_email,
-        vol_phone_num,
-        vol_zip,
-        referral_source,
-        sewing_level,
-        willing_hours_per_month,
-        member_since,
-      ]
-    );
-    res.redirect('/'); // Redirect to landing page after submission
-  } catch (err) {
-    console.error('Error inserting volunteer data:', err);
-    res.status(500).send('Error processing your request.');
-  }
+  knex('volunteers')
+    .insert({
+      vol_first_name,
+      vol_last_name,
+      vol_email,
+      vol_phone_num,
+      vol_zip,
+      referral_source,
+      sewing_level,
+      willing_hours_per_month,
+      member_since,
+    })
+    .then(() => {
+      // Redirect to the homepage after successful insertion
+      res.redirect('/');
+    })
+    .catch(error => {
+      console.error('Error inserting volunteer data:', error);
+      res.status(500).send('Internal Server Error');
+    });
 });
+
 
 // ABOVE WORKS --------------------------------------------------------
 
