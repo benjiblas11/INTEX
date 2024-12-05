@@ -15,7 +15,7 @@ const knex = require("knex") ({
   database : process.env.RDS_DB_NAME || "ebdb",
   port : process.env.RDS_PORT || 5432,
   ssl: { require: true, rejectUnauthorized: false } // Fixed line
-  // ssl: process.env.DB_SSL ? {rejectUnauthorized: false } : false  // Fixed line
+  // ssl: process.env.DB_SSL ? {rejectUnauthorized: false } : false  // WRONG LINE 
 }
 })
 app.set("views", path.join(__dirname, "views"));
@@ -100,7 +100,7 @@ app.post('/submit-event-request', (req, res) => {
       event_contact_phone_num: event_contact_phone_num,
       event_contact_email: event_contact_email,
       approved_status: false, // Default value
-      completed_status: false, // Default value
+      completed_status: false // Default value
     })
     .then(() => {
       res.redirect('/success'); // Redirect to a success page
@@ -224,7 +224,7 @@ app.get('/view-upcoming-events', (req, res) => {
       'event.approved_status',
       'event.confirmed_status'
     )
-    .where('completed_status', false)
+    .where('confirmed_status', false)
     .orderBy('first_datetime_pref', 'asc')
     .then(event => {
       // Render the upcomingevents.ejs template and pass the data
@@ -268,9 +268,9 @@ app.get('/view-upcoming-events-date', (req, res) => {
       'event.vests_produced',
       'event.completed_products',
       'event.approved_status',
-      'event.completed_status'
+      'event.confirmed_status'
     )
-    .where('completed_status', false)
+    .where('confirmed_status', false)
     .orderBy('first_datetime_pref', 'asc')
     .then(event => {
       // Render the upcomingevents.ejs template and pass the data
@@ -314,9 +314,9 @@ app.get('/view-completed-events', (req, res) => {
       'event.vests_produced',
       'event.completed_products',
       'event.approved_status',
-      'event.completed_status'
+      'event.confirmed_status'
     )
-    .where('completed_status', true)
+    .where('confirmed_status', true)
     .orderBy('selected_datetime', 'asc')
     .then(event => {
       // Render the upcomingevents.ejs template and pass the data
@@ -324,6 +324,65 @@ app.get('/view-completed-events', (req, res) => {
     })
     .catch(error => {
       console.error('Error querying database:', error);
+      res.status(500).send('Internal Server Error');
+    });
+});
+
+
+// ADMIN Route to handle event form submission
+app.post('/admin-event-request', (req, res) => {
+  // Access each value directly from req.body
+  const exp_total_attendance = parseInt(req.body.exp_total_attendance);
+  const event_type = req.body.event_type;
+  const first_datetime_pref = req.body.first_datetime_pref;
+  const sec_datetime_pref = req.body.sec_datetime_pref || null; // Optional field
+  const third_datetime_pref = req.body.third_datetime_pref || null; // Optional field
+  const event_duration = parseFloat(req.body.event_duration); // Convert to float for half-hours
+  const event_street = req.body.event_street;
+  const event_city = req.body.event_city;
+  const event_state = req.body.event_state;
+  const event_zip = req.body.event_zip;
+  const event_additional_info = req.body.event_additional_info || null; // Optional field
+  const jen_share_story = req.body.jen_share_story === 'true'; // Convert checkbox value to boolean
+  const exp_num_sew_machines = parseInt(req.body.exp_num_sew_machines);
+  const exp_num_serger_machines = parseInt(req.body.exp_num_serger_machines);
+  const exp_under_18 = parseInt(req.body.exp_under_18);
+  const exp_over_18 = parseInt(req.body.exp_over_18);
+  const event_contact_first_name = req.body.event_contact_first_name;
+  const event_contact_last_name = req.body.event_contact_last_name;
+  const event_contact_phone_num = req.body.event_contact_phone_num;
+  const event_contact_email = req.body.event_contact_email;
+  // Insert the event into the database
+  knex('event')
+    .insert({
+      exp_total_attendance: exp_total_attendance,
+      event_type: event_type,
+      first_datetime_pref: first_datetime_pref,
+      sec_datetime_pref: sec_datetime_pref,
+      third_datetime_pref: third_datetime_pref,
+      event_duration: event_duration,
+      event_street: event_street,
+      event_city: event_city,
+      event_state: event_state,
+      event_zip: event_zip,
+      event_additional_info: event_additional_info,
+      jen_share_story: jen_share_story,
+      exp_num_sew_machines: exp_num_sew_machines,
+      exp_num_serger_machines: exp_num_serger_machines,
+      exp_under_18: exp_under_18,
+      exp_over_18: exp_over_18,
+      event_contact_first_name: event_contact_first_name,
+      event_contact_last_name: event_contact_last_name,
+      event_contact_phone_num: event_contact_phone_num,
+      event_contact_email: event_contact_email,
+      approved_status: false, // Default value
+      completed_status: false // Default value
+    })
+    .then(() => {
+      res.redirect('/view-upcoming-events-date'); // Redirect to a success page
+    })
+    .catch(error => {
+      console.error('Error submitting event request:', error);
       res.status(500).send('Internal Server Error');
     });
 });
@@ -352,6 +411,42 @@ app.get('/view-volunteers', (req, res) => {
     });
 });
 
+// ADMIN VOLUNTEER POST
+app.post('/admin-volunteer-form', async (req, res) => {
+  const {
+    vol_first_name,
+    vol_last_name,
+    vol_email,
+    vol_phone_num,
+    vol_zip,
+    referral_source,
+    sewing_level,
+    willing_hours_per_month
+  } = req.body;
+
+  try {
+    // Insert volunteer data into the database
+    await pool.query(
+      `INSERT INTO volunteers (vol_first_name, vol_last_name, vol_email, vol_phone_num, vol_zip, referral_source, sewing_level, willing_hours_per_month)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
+      [
+        vol_first_name,
+        vol_last_name,
+        vol_email,
+        vol_phone_num,
+        vol_zip,
+        referral_source,
+        sewing_level,
+        willing_hours_per_month
+      ]
+    );
+    res.redirect('/view-volunteers'); // Redirect to view volunteers page after submission
+  } catch (err) {
+    console.error('Error inserting volunteer data:', err);
+    res.status(500).send('Error processing your request.');
+  }
+});
+
 // view admin GET
 app.get('/view-admins', (req, res) => {
   knex('admin')
@@ -375,89 +470,103 @@ app.get('/view-admins', (req, res) => {
     });
 });
 
-// POST for EDITS
-//   the :id refers to the id record we passed in the editPoke.ejs form 
-app.post('/editCharacter/:id', (req, res) => {
-  const id = req.params.id;
 
-  // Access each value directly from req.body
-  const first_name = req.body.first_name; // SEE LINE 49 IN editPoke.ejs
-
-  const last_name = req.body.last_name; // 
-
-  const planet_name = parseInt(req.body.planet_name); //convert to int
-
-  // Since active_poke is a checkbox, its value is only sent when the checkbox is checked.
-
-  // If it is unchecked, no value is sent to the server.
-
-  // This behavior requires special handling on the server-side to set a default
-
-  // value for active_poke when it is not present in req.body.
-
-  const jedi = req.body.jedi === 'true'; // Convert checkbox value to boolean
-
-  const weapon= req.body.weapon;
-
-  // Update the Pokémon in the database
-  knex('characters')
-    .where('id', id)
-  //   the left side of : is the DB column name. the right side is the 
-    .update({
-      first_name: first_name,
-      last_name: last_name,
-      planet_name: planet_name,
-      jedi: jedi,
-      weapon: weapon,
-      
-    })
-    .then(() => {
-      res.redirect('/'); // Redirect to the home pageafter saving
-    })
-    .catch(error => {
-      console.error('Error updating character:', error);
-      res.status(500).send('Internal Server Error');
-    });
+// 
+app.get('/addAdmin', (req, res) => {
+  res.render('addAdmin');
 });
 
-
-// the POST Template for ADD admins and event
-app.post('/addCharacter', (req, res) => {
+app.post('/addAdmin', (req, res) => {
   // Extract form values from req.body
-  const first_name = req.body.first_name || ''; // Default to empty string if not provided
-  const last_name = req.body.last_name || '';
-  const planet_name = parseInt(req.body.planet_name, 10); // Convert to integer
-                          // const date_created = req.body.date_created || new Date().toISOString().split('T')[0]; // Default to today
-  const jedi = req.body.jedi === 'true'; // Checkbox returns true or undefined
-  const weapon= req.body.weapon|| 'N'; // Default to 'N' for None
-                              // const poke_type_id = parseInt(req.body.poke_type_id, 10); // Convert to integer
-  // Insert the new character into the database
-  knex('characters')
+  const admin_first_name = req.body.description || ''; // Default to empty string if not provided
+  const admin_last_name= req.body.description || ''; // Convert to integer
+  const admin_email = req.body.description || ''; // Default to empty string if not provided
+  const hashed_password = req.body.description || ''; // Default to empty string if not provided
+  const created_at = req.body.date_created || new Date().toISOString().split('T')[0]; // Default to today
+  const updated_at = req.body.date_created || new Date().toISOString().split('T')[0]; // Default to today
+  // const active_poke = req.body.active_poke === 'true'; // Checkbox returns true or undefined
+  // const gender = req.body.gender || 'U'; // Default to 'U' for Unknown
+  // const poke_type_id = parseInt(req.body.poke_type_id, 10); // Convert to integer
+  // Insert the new Pokémon into the database
+  knex('admin')
     .insert({
-      first_name: first_name.toUpperCase(), // Ensure description is uppercase
-      last_name: last_name.toUpperCase(),
-      planet_name: planet_name,
-      jedi: jedi,
-      weapon: weapon,
+      admin_first_name: admin_first_name.toUpperCase(), // Ensure description is uppercase
+      admin_last_name: admin_last_name,
+      admin_email: admin_email,
+      hashed_password: hashed_password,
+      created_at: created_at,
+      updated_at: updated_at
     })
     .then(() => {
-      res.redirect('/'); // Redirect to the character list page after adding
+      res.redirect('/view-admins'); // Redirect to the Pokémon list page after adding
     })
     .catch(error => {
-      console.error('Error adding Pokémon:', error);
+      console.error('Error adding admin:', error);
       res.status(500).send('Internal Server Error');
     });
 });
+
+
+
+  // editPlanet route from mainPlanet.ejs 
+  app.get('/editAdmin/:id', (req, res) => {
+    let id = req.params.id;
+  
+    // Query the admin by ID
+    knex('admin')
+      .where('id', id)
+      .first() // Fetch a single row
+      .then(admin => {
+        if (!admin) {
+          return res.status(404).send('Admin not found');
+        }
+  
+        // Render the editAdmin.ejs template with the admin data
+        res.render('editAdmin', { admin });
+      })
+      .catch(error => {
+        console.error('Error fetching admin for editing:', error);
+        res.status(500).send('Internal Server Error');
+      });
+  });
+  
+
+
+// POST for EDITS
+app.post('/editAdmin/:id', (req, res) => {
+  const id = req.params.id;
+  const { admin_first_name, admin_last_name, admin_email, hashed_password, created_at, updated_at } = req.body;
+
+  // Update the admin in the database
+  knex('admin')
+    .where('id', id)
+    .update({
+      admin_first_name: admin_first_name.toUpperCase(),
+      admin_last_name,
+      admin_email,
+      hashed_password, // Ensure this is hashed before storing
+      created_at,
+      updated_at: new Date().toISOString(), // Auto-update the timestamp
+    })
+    .then(() => {
+      res.redirect('/view-admins'); // Redirect to the admin list
+    })
+    .catch(error => {
+      console.error('Error updating admin:', error);
+      res.status(500).send('Internal Server Error');
+    });
+});
+
 
 
 // template for the DELETE buttons
-app.post('/deleteCharacter/:id', (req, res) => {
+app.post('/deleteAdmin/:id', (req, res) => {
   const id = req.params.id;
-  knex('characters')
+  knex('admin')
     .where('id', id)
     .del() // Deletes the record with the specified ID
     .then(() => {
-      res.redirect('/'); // Redirect to the character list after deletion
+      res.redirect('/viewAdmins'); // Redirect to the character list after deletion
     })
     .catch(error => {
       console.error('Error deleting character:', error);
@@ -480,7 +589,7 @@ app.post('/register', async (req, res) => {
             first_name,
             last_name,
             username,
-            hashed_password: hashedPassword,
+            hashed_password: hashedPassword
         });
         res.send('Registration successful!');
     } catch (err) {
@@ -508,6 +617,7 @@ app.post('/submit-volunteer-form', (req, res) => {
     vol_zip,
     referral_source,
     sewing_level,
+    
     willing_hours_per_month,
     member_since,
   } = req.body;
