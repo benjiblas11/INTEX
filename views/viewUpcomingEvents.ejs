@@ -57,6 +57,7 @@
         <th>Email</th>
         <th>Phone Number</th>
         <th>Approved Status</th>
+        <th>Confirmed Status</th>
       </tr>
     </thead>
     <tbody>
@@ -76,6 +77,7 @@
             <td><%= row.first_datetime_pref %></td> 
             <td><%= row.sec_datetime_pref %></td> 
             <td><%= row.third_datetime_pref %></td> 
+            <td><%= row.event_duration %></td> 
             <td><%= row.jen_share_story %></td>
             <td><%= row.event_type %></td> 
             <td><%= row.exp_num_sew_machines %></td> 
@@ -85,8 +87,8 @@
             <td><%= row.event_contact_email %></td> 
             <td><%= row.event_contact_phone_num %></td> 
             <td><%= row.approved_status ? 'Yes' : 'No' %></td> <!-- Display 'Yes' if active, otherwise 'No' -->
-            <td><%= row.completed_status ? 'Yes' : 'No' %></td>
-
+            <td><%= row.confirmed_status ? 'Yes' : 'No' %></td>
+            
             <td>
               <!-- each form is a submit button with action  -->
                

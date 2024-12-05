@@ -15,7 +15,7 @@ const knex = require("knex") ({
   database : process.env.RDS_DB_NAME || "ebdb",
   port : process.env.RDS_PORT || 5432,
   ssl: { require: true, rejectUnauthorized: false } // Fixed line
-  // ssl: process.env.DB_SSL ? {rejectUnauthorized: false } : false  // Fixed line
+  // ssl: process.env.DB_SSL ? {rejectUnauthorized: false } : false  // WRONG LINE 
 }
 })
 app.set("views", path.join(__dirname, "views"));
@@ -224,7 +224,7 @@ app.get('/view-upcoming-events', (req, res) => {
       'event.approved_status',
       'event.confirmed_status'
     )
-    .where('completed_status', false)
+    .where('confirmed_status', false)
     .orderBy('first_datetime_pref', 'asc')
     .then(event => {
       // Render the upcomingevents.ejs template and pass the data
@@ -268,9 +268,9 @@ app.get('/view-upcoming-events-date', (req, res) => {
       'event.vests_produced',
       'event.completed_products',
       'event.approved_status',
-      'event.completed_status'
+      'event.confirmed_status'
     )
-    .where('completed_status', false)
+    .where('confirmed_status', false)
     .orderBy('first_datetime_pref', 'asc')
     .then(event => {
       // Render the upcomingevents.ejs template and pass the data
@@ -314,9 +314,9 @@ app.get('/view-completed-events', (req, res) => {
       'event.vests_produced',
       'event.completed_products',
       'event.approved_status',
-      'event.completed_status'
+      'event.confirmed_status'
     )
-    .where('completed_status', true)
+    .where('confirmed_status', true)
     .orderBy('selected_datetime', 'asc')
     .then(event => {
       // Render the upcomingevents.ejs template and pass the data
