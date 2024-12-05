@@ -108,3 +108,31 @@ app.post('/submit-event-request', (req, res) => {
 // END OF JEFF'S STUFF AS OF 12/3/24
 
 //poop
+
+//ABOVE WORKS --------------------------------------------
+
+// Route to Jens Story Page
+app.get('/jensstory', (req, res) => {
+  res.render('jensstory');
+});
+
+// Route to How You Can Help Page
+app.get('/howucanhelp', (req, res) => {
+res.render('howucanhelp');
+});
+
+
+//  Route for the login page
+app.get('/login', (req, res) => {
+res.render('login'); // Renders login.ejs
+});
+
+app.post('/login', (req, res) => {
+// Directly redirect to user-home without authentication
+res.redirect('/user-home');
+});
+
+
+app.get('/user-home', (req, res) => {
+res.render('userHome'); // Renders userHome.ejs
+});
