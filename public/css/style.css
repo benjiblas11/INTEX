@@ -185,19 +185,22 @@
 .form-group textarea {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #ccc; /* Consistent border for both input and select */
   border-radius: 4px;
   font-size: 1em;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box; /* Make sure padding is included in width calculation */
 }
 
+/* Ensure both input fields and select have matching border and style */
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-  border-color: var(--teal);
+  border-color: var(--teal); 
   box-shadow: 0px 0px 5px rgba(0, 128, 128, 0.5); /* Teal focus glow */
   outline: none;
 }
+
 
 .form-group small {
   font-size: 0.85em;
