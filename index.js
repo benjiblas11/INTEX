@@ -11,12 +11,14 @@ const knex = require("knex") ({
   connection : {
   host : process.env.RDS_HOSTNAME || "awseb-e-dcpssqafyh-stack-awsebrdsdatabase-ofssl7nxdyot.cn6220qmsuba.us-east-1.rds.amazonaws.com",
   user : process.env.RDS_USERNAME || "ebroot",
-  password : process.env.RDS_PASSWORD || "Password123",
+  password : process.env.RDS_PASSWORD || "iloveintex",
   database : process.env.RDS_DB_NAME || "ebdb",
   port : process.env.RDS_PORT || 5432,
-  ssl: process.env.DB_SSL ? { rejectUnauthorized: false } : false  // Fixed line
+  ssl: process.env.DB_SSL ? { require: true, rejectUnauthorized: false } : false  // Fixed line
+  // ssl: process.env.DB_SSL ? {rejectUnauthorized: false } : false  // Fixed line
 }
 })
+
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 // Serve static files (CSS, images, etc.)
@@ -513,15 +515,15 @@ app.post('/submit-volunteer-form', (req, res) => {
 
   knex('volunteers')
     .insert({
-      vol_first_name,
-      vol_last_name,
-      vol_email,
-      vol_phone_num,
-      vol_zip,
-      referral_source,
-      sewing_level,
-      willing_hours_per_month,
-      member_since,
+        vol_first_name,
+        vol_last_name,
+        vol_email,
+        vol_phone_num,
+        vol_zip,
+        referral_source,
+        sewing_level,
+        willing_hours_per_month,
+        member_since,
     })
     .then(() => {
       // Redirect to the homepage after successful insertion
