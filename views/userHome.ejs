@@ -7,112 +7,136 @@
     <link rel="stylesheet" href="/css/style.css">
     <style>
         /* General Styles */
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            background: var(--teal-background); /* Teal background from variable */
-            color: #2d3436;
-        }
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    background: var(--teal-background); /* Teal background from variable */
+    color: #2d3436;
+    overflow: hidden; /* Prevents unnecessary scrolling on the body */
+}
 
-        /* Sidebar Styles */
-        .sidebar {
-            background-color: var(--teal); /* Teal background from variable */
-            width: 250px;
-            padding: 30px;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center; /* Center items horizontally */
-        }
-        .sidebar h1 {
-            font-size: 1.8rem;
-            color: #ffffff;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        .sidebar .action-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            width: 100%;
-        }
-        .sidebar .action-buttons form {
-            width: 100%;
-        }
-        .sidebar .action-buttons button {
-            color: #ffffff;
-            background: var(--teal-light); /* Lighter teal for button background */
-            padding: 12px 20px;
-            border-radius: 6px;
-            font-size: 1rem;
-            text-align: center;
-            border: none;
-            cursor: pointer;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
-            width: 100%;
-        }
-        .sidebar .action-buttons button:hover {
-            background: var(--teal); /* Darker teal for hover */
-            transform: translateY(-2px); /* Lift the button on hover */
-        }
-        .sidebar .action-buttons button:active {
-            transform: translateY(1px); /* Slight depression effect when clicked */
-        }
+/* Sidebar Styles */
+.sidebar {
+    position: fixed; /* Keeps the sidebar fixed on the left */
+    top: 0;
+    left: 0;
+    background-color: var(--teal); /* Teal background from variable */
+    width: 250px;
+    padding: 30px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    height: 100vh; /* Ensures it spans the full viewport height */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center; /* Center items horizontally */
+}
+.sidebar h1 {
+    font-size: 1.8rem;
+    color: #ffffff;
+    margin-bottom: 30px;
+    text-align: center;
+}
+.sidebar .action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+.sidebar .action-buttons form {
+    width: 100%;
+}
+.sidebar .action-buttons button {
+    color: #ffffff;
+    background: var(--teal-light); /* Lighter teal for button background */
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 1rem;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
+    width: 100%;
+}
+.sidebar .action-buttons button:hover {
+    background: var(--teal); /* Darker teal for hover */
+    transform: translateY(-2px); /* Lift the button on hover */
+}
+.sidebar .action-buttons button:active {
+    transform: translateY(1px); /* Slight depression effect when clicked */
+}
+footer {
+    margin-top: 400px;
+    font-size: 0.9rem;
+    color: #b2bec3;
+    text-align: center;
+}
+footer a {
+    color: #ffffff;
+    text-decoration: none;
+}
+footer a:hover {
+    text-decoration: underline;
+}
 
-        footer {
-            margin-top: 250px;
-            font-size: 0.9rem;
-            color: #b2bec3;
-            text-align: center;
-        }
-        footer a {
-            color: #ffffff;
-            text-decoration: none;
-        }
-        footer a:hover {
-            text-decoration: underline;
-        }
+/* Main Content */
+.main-content {
+    margin-left: 400px; /* Spacing from the sidebar */
+    padding: 30px 50px; /* Padding for better alignment */
+    background: #ffffff;
+    height: 100vh; /* Matches the viewport height */
+    overflow-y: auto; /* Enables scrolling for content */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+}
 
-        /* Main Content */
-        .main-content {
-            flex-grow: 1;
-            background: #ffffff;
-            padding: 30px;
-            margin-left: 250px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-        }
-        .main-content h2 {
-            color: var(--teal); /* Teal text color */
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-        .main-content p {
-            font-size: 1.1rem;
-            color: #636e72;
-            margin-bottom: 20px;
-        }
+/* Dashboard Heading */
+.main-content h2 {
+    color: var(--teal); /* Teal text color */
+    font-size: 2.2rem; /* Slightly larger heading */
+    margin-bottom: 20px;
+    text-align: left; /* Aligns the heading to the left */
+    margin-left: 20px; /* Added slight left margin for spacing */
+    font-weight: bold; /* Bolder heading */
+    letter-spacing: 1px; /* Subtle letter spacing */
+}
 
-        /* Tableau iframe style */
-        .tableau-container {
-            margin-top: 30px;
-            border: 1px solid #ccc;
-            padding: 10px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        iframe {
-            width: 100%;
-            height: 400px; /* Reduced height for better fit */
-            border: none;
-        }
+/* Dashboard Paragraph */
+.main-content p {
+    font-size: 1.2rem; /* Slightly larger paragraph text */
+    color: #636e72;
+    margin-bottom: 20px;
+    margin-left: 20px; /* Aligns with the heading */
+    line-height: 1.6; /* Adds spacing between lines for readability */
+}
+
+/* Dashboard iframe */
+iframe {
+    width: 100%; /* Stretches to fill the container */
+    height: 800px; /* Ample height for dashboard visibility */
+    border: none; /* Removes border for a clean look */
+    border-radius: 8px; /* Rounded corners for iframe */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for iframe */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 250px; /* Adjust the left margin for smaller screens */
+        padding: 20px;
+    }
+    .tableau-container {
+        padding: 10px;
+    }
+    iframe {
+        height: 600px; /* Smaller iframe for mobile */
+    }
+}
+
     </style>
 </head>
 <body>
@@ -146,8 +170,6 @@
         
         <!-- Tableau Public Dashboard Embed Section -->
         <div class="tableau-container">
-            <h3>Tableau Dashboard</h3>
-            <p>Below is the embedded Tableau Public dashboard.</p>
             <div class='tableauPlaceholder' id='viz1733458941281' style='position: relative'>
                 <noscript>
                     <a href='#'>
