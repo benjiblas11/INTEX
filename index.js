@@ -66,7 +66,6 @@ app.post('/submit-event-request', (req, res) => {
   const event_city = req.body.event_city;
   const event_state = req.body.event_state;
   const event_zip = req.body.event_zip;
-  const event_additional_info = req.body.event_additional_info || null; // Optional field
   const jen_share_story = req.body.jen_share_story === 'true'; // Convert checkbox value to boolean
   const exp_num_sew_machines = parseInt(req.body.exp_num_sew_machines);
   const exp_num_serger_machines = parseInt(req.body.exp_num_serger_machines);
@@ -76,6 +75,7 @@ app.post('/submit-event-request', (req, res) => {
   const event_contact_last_name = req.body.event_contact_last_name;
   const event_contact_phone_num = req.body.event_contact_phone_num;
   const event_contact_email = req.body.event_contact_email;
+  const add_info = req.body.add_info || null; // Optional field
   // Insert the event into the database
   knex('event')
     .insert({
@@ -89,7 +89,6 @@ app.post('/submit-event-request', (req, res) => {
       event_city: event_city,
       event_state: event_state,
       event_zip: event_zip,
-      event_additional_info: event_additional_info,
       jen_share_story: jen_share_story,
       exp_num_sew_machines: exp_num_sew_machines,
       exp_num_serger_machines: exp_num_serger_machines,
@@ -100,7 +99,9 @@ app.post('/submit-event-request', (req, res) => {
       event_contact_phone_num: event_contact_phone_num,
       event_contact_email: event_contact_email,
       approved_status: false, // Default value
-      confirmed_status: false // Default value
+      confirmed_status: false, // Default value
+      add_info: add_info
+      
     })
     .then(() => {
       res.redirect('/success'); // Redirect to a success page
@@ -350,7 +351,6 @@ app.post('/addEvents', (req, res) => {
   const event_city = req.body.event_city;
   const event_state = req.body.event_state;
   const event_zip = req.body.event_zip;
-  const event_additional_info = req.body.event_additional_info || null; // Optional field
   const jen_share_story = req.body.jen_share_story === 'true'; // Convert checkbox value to boolean
   const exp_num_sew_machines = parseInt(req.body.exp_num_sew_machines);
   const exp_num_serger_machines = parseInt(req.body.exp_num_serger_machines);
@@ -360,6 +360,7 @@ app.post('/addEvents', (req, res) => {
   const event_contact_last_name = req.body.event_contact_last_name;
   const event_contact_phone_num = req.body.event_contact_phone_num;
   const event_contact_email = req.body.event_contact_email;
+  const add_info = req.body.add_info || null; // Optional field
   // Insert the event into the database
   knex('event')
     .insert({
@@ -373,7 +374,6 @@ app.post('/addEvents', (req, res) => {
       event_city: event_city,
       event_state: event_state,
       event_zip: event_zip,
-      event_additional_info: event_additional_info,
       jen_share_story: jen_share_story,
       exp_num_sew_machines: exp_num_sew_machines,
       exp_num_serger_machines: exp_num_serger_machines,
@@ -384,7 +384,8 @@ app.post('/addEvents', (req, res) => {
       event_contact_phone_num: event_contact_phone_num,
       event_contact_email: event_contact_email,
       approved_status: false, // Default value
-      confirmed_status: false // Default value
+      confirmed_status: false, // Default value
+      add_info: add_info
     })
     .then(() => {
       res.redirect('/view-upcoming-events-date'); // Redirect to a success page
@@ -428,7 +429,6 @@ app.post('/editEvents/:id', (req, res) => {
     event_city: req.body.event_city,
     event_state: req.body.event_state,
     event_zip: req.body.event_zip,
-    event_additional_info: req.body.event_additional_info || null,
     jen_share_story: req.body.jen_share_story || false,
     exp_num_sew_machines: parseInt(req.body.exp_num_sew_machines),
     exp_num_serger_machines: parseInt(req.body.exp_num_serger_machines),
@@ -439,7 +439,8 @@ app.post('/editEvents/:id', (req, res) => {
     event_contact_phone_num: req.body.event_contact_phone_num,
     event_contact_email: req.body.event_contact_email,
     approved_status: req.body.approved_status || false,
-    completed_status: req.body.completed_status || false
+    confirmed_status: req.body.confirmed_status || false,
+    add_info: req.body.add_info || null
   };
 
   knex('event')
@@ -647,7 +648,7 @@ app.post('/addAdmin', (req, res) => {
   
     // Query the admin by ID
     knex('admin')
-      .where('id', id)
+      .where('admin_id', id)
       .first() // Fetch a single row
       .then(admin => {
         if (!admin) {
@@ -679,7 +680,7 @@ app.post('/editAdmin/:id', (req, res) => {
 
   // Update the admin in the database
   knex('admin')
-    .where('id', id)
+    .where('admin_id', id)
     .update({
       admin_first_name: admin_first_name.toUpperCase(),
       admin_last_name: admin_last_name.toUpperCase(),
@@ -703,7 +704,7 @@ app.post('/editAdmin/:id', (req, res) => {
 app.post('/deleteAdmin/:id', (req, res) => {
   const id = req.params.id;
   knex('admin')
-    .where('id', id)
+    .where('admin_id', id)
     .del() // Deletes the record with the specified ID
     .then(() => {
       res.redirect('/view-admins'); // Redirect to the character list after deletion

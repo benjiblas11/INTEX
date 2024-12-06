@@ -100,9 +100,6 @@
         <label for="event_zip">Event Zip:</label>
         <input type="text" id="event_zip" name="event_zip" value="<%= event.event_zip %>" required><br>
 
-        <label for="event_additional_info">Additional Info:</label>
-        <textarea id="event_additional_info" name="event_additional_info"><%= event.event_additional_info %></textarea><br>
-
         <label for="jen_share_story">Jen Share Story:</label>
         <input type="checkbox" id="jen_share_story" name="jen_share_story" <%= event.jen_share_story ? 'checked' : '' %>><br>
 
@@ -135,6 +132,9 @@
 
         <label for="confirmed_status">Completed Status:</label>
         <input type="checkbox" id="confirmed_status" name="confirmed_status" <%= event.confirmed_status ? 'checked' : '' %>><br>
+
+        <label for="add_info">Additional Info:</label>
+        <textarea id="add_info" name="add_info"><%= event.add_info %></textarea><br>
 
         <button type="submit">Save Changes</button>
     </form>
