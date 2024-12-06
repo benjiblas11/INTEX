@@ -717,7 +717,7 @@ app.post('/deleteAdmin/:id', (req, res) => {
 app.post('/deleteEvents/:id', (req, res) => {
   const id = req.params.id;
   knex('event')
-    .where('id', id)
+    .where('event_id', id)
     .del() // Deletes the record with the specified ID
     .then(() => {
       res.redirect('/view-upcoming-events'); // Redirect to the character list after deletion
@@ -731,7 +731,7 @@ app.post('/deleteEvents/:id', (req, res) => {
 app.post('/deleteVolunteers/:id', (req, res) => {
   const id = req.params.id;
   knex('volunteer')
-    .where('id', id)
+    .where('vol_id', id)
     .del() // Deletes the record with the specified ID
     .then(() => {
       res.redirect('/view-volunteers'); // Redirect to the character list after deletion
