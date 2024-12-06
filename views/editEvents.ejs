@@ -5,23 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Event</title>
 </head>
-<body>
+<body> 
     <h1>Edit Event</h1>
-    <form action="/editEvents/<%= event.id %>" method="POST">
+    <form action="/editEvents/<%= event.event_id %>" method="POST">
         <label for="exp_total_attendance">Expected Total Attendance:</label>
         <input type="number" id="exp_total_attendance" name="exp_total_attendance" value="<%= event.exp_total_attendance %>" required><br>
 
         <label for="event_type">Event Type:</label>
-        <input type="text" id="event_type" name="event_type" value="<%= event.event_type %>" required><br>
+        <select id="event_type" name="event_type" required>
+            <option value="Sewing" <%= event.event_type === 'Sewing' ? 'selected' : '' %>>Sewing</option>
+            <option value="Non-Sewing" <%= event.event_type === 'Non-Sewing' ? 'selected' : '' %>>Non-Sewing</option>
+            <option value="Both" <%= event.event_type === 'Both' ? 'selected' : '' %>>Both</option>
+        </select><br>
 
         <label for="first_datetime_pref">First Date/Time Preference:</label>
-        <input type="datetime-local" id="first_datetime_pref" name="first_datetime_pref" value="<%= event.first_datetime_pref %>" required><br>
-
+        <input type="datetime-local" id="first_datetime_pref" name="first_datetime_pref" 
+               value="<%= new Date(event.first_datetime_pref).toISOString().slice(0, 16) %>" required>
+        <span>(Timezone: <%= new Date(event.first_datetime_pref).toLocaleTimeString('en-US', { timeZoneName: 'short' }).split(' ')[2] %>)</span><br>
+        
         <label for="sec_datetime_pref">Second Date/Time Preference:</label>
-        <input type="datetime-local" id="sec_datetime_pref" name="sec_datetime_pref" value="<%= event.sec_datetime_pref %>"><br>
-
+        <input type="datetime-local" id="sec_datetime_pref" name="sec_datetime_pref" 
+               value="<%= new Date(event.sec_datetime_pref).toISOString().slice(0, 16) %>">
+        <span>(Timezone: <%= new Date(event.sec_datetime_pref).toLocaleTimeString('en-US', { timeZoneName: 'short' }).split(' ')[2] %>)</span><br>
+        
         <label for="third_datetime_pref">Third Date/Time Preference:</label>
-        <input type="datetime-local" id="third_datetime_pref" name="third_datetime_pref" value="<%= event.third_datetime_pref %>"><br>
+        <input type="datetime-local" id="third_datetime_pref" name="third_datetime_pref" 
+               value="<%= new Date(event.third_datetime_pref).toISOString().slice(0, 16) %>">
+        <span>(Timezone: <%= new Date(event.third_datetime_pref).toLocaleTimeString('en-US', { timeZoneName: 'short' }).split(' ')[2] %>)</span><br>
+        
 
         <label for="event_duration">Event Duration (hours):</label>
         <input type="number" step="0.5" id="event_duration" name="event_duration" value="<%= event.event_duration %>" required><br>
@@ -33,13 +44,61 @@
         <input type="text" id="event_city" name="event_city" value="<%= event.event_city %>" required><br>
 
         <label for="event_state">Event State:</label>
-        <input type="text" id="event_state" name="event_state" value="<%= event.event_state %>" required><br>
+        <select id="event_state" name="event_state" required>
+            <option value="AL" <%= event.event_state === 'AL' ? 'selected' : '' %>>Alabama</option>
+            <option value="AK" <%= event.event_state === 'AK' ? 'selected' : '' %>>Alaska</option>
+            <option value="AZ" <%= event.event_state === 'AZ' ? 'selected' : '' %>>Arizona</option>
+            <option value="AR" <%= event.event_state === 'AR' ? 'selected' : '' %>>Arkansas</option>
+            <option value="CA" <%= event.event_state === 'CA' ? 'selected' : '' %>>California</option>
+            <option value="CO" <%= event.event_state === 'CO' ? 'selected' : '' %>>Colorado</option>
+            <option value="CT" <%= event.event_state === 'CT' ? 'selected' : '' %>>Connecticut</option>
+            <option value="DE" <%= event.event_state === 'DE' ? 'selected' : '' %>>Delaware</option>
+            <option value="FL" <%= event.event_state === 'FL' ? 'selected' : '' %>>Florida</option>
+            <option value="GA" <%= event.event_state === 'GA' ? 'selected' : '' %>>Georgia</option>
+            <option value="HI" <%= event.event_state === 'HI' ? 'selected' : '' %>>Hawaii</option>
+            <option value="ID" <%= event.event_state === 'ID' ? 'selected' : '' %>>Idaho</option>
+            <option value="IL" <%= event.event_state === 'IL' ? 'selected' : '' %>>Illinois</option>
+            <option value="IN" <%= event.event_state === 'IN' ? 'selected' : '' %>>Indiana</option>
+            <option value="IA" <%= event.event_state === 'IA' ? 'selected' : '' %>>Iowa</option>
+            <option value="KS" <%= event.event_state === 'KS' ? 'selected' : '' %>>Kansas</option>
+            <option value="KY" <%= event.event_state === 'KY' ? 'selected' : '' %>>Kentucky</option>
+            <option value="LA" <%= event.event_state === 'LA' ? 'selected' : '' %>>Louisiana</option>
+            <option value="ME" <%= event.event_state === 'ME' ? 'selected' : '' %>>Maine</option>
+            <option value="MD" <%= event.event_state === 'MD' ? 'selected' : '' %>>Maryland</option>
+            <option value="MA" <%= event.event_state === 'MA' ? 'selected' : '' %>>Massachusetts</option>
+            <option value="MI" <%= event.event_state === 'MI' ? 'selected' : '' %>>Michigan</option>
+            <option value="MN" <%= event.event_state === 'MN' ? 'selected' : '' %>>Minnesota</option>
+            <option value="MS" <%= event.event_state === 'MS' ? 'selected' : '' %>>Mississippi</option>
+            <option value="MO" <%= event.event_state === 'MO' ? 'selected' : '' %>>Missouri</option>
+            <option value="MT" <%= event.event_state === 'MT' ? 'selected' : '' %>>Montana</option>
+            <option value="NE" <%= event.event_state === 'NE' ? 'selected' : '' %>>Nebraska</option>
+            <option value="NV" <%= event.event_state === 'NV' ? 'selected' : '' %>>Nevada</option>
+            <option value="NH" <%= event.event_state === 'NH' ? 'selected' : '' %>>New Hampshire</option>
+            <option value="NJ" <%= event.event_state === 'NJ' ? 'selected' : '' %>>New Jersey</option>
+            <option value="NM" <%= event.event_state === 'NM' ? 'selected' : '' %>>New Mexico</option>
+            <option value="NY" <%= event.event_state === 'NY' ? 'selected' : '' %>>New York</option>
+            <option value="NC" <%= event.event_state === 'NC' ? 'selected' : '' %>>North Carolina</option>
+            <option value="ND" <%= event.event_state === 'ND' ? 'selected' : '' %>>North Dakota</option>
+            <option value="OH" <%= event.event_state === 'OH' ? 'selected' : '' %>>Ohio</option>
+            <option value="OK" <%= event.event_state === 'OK' ? 'selected' : '' %>>Oklahoma</option>
+            <option value="OR" <%= event.event_state === 'OR' ? 'selected' : '' %>>Oregon</option>
+            <option value="PA" <%= event.event_state === 'PA' ? 'selected' : '' %>>Pennsylvania</option>
+            <option value="RI" <%= event.event_state === 'RI' ? 'selected' : '' %>>Rhode Island</option>
+            <option value="SC" <%= event.event_state === 'SC' ? 'selected' : '' %>>South Carolina</option>
+            <option value="SD" <%= event.event_state === 'SD' ? 'selected' : '' %>>South Dakota</option>
+            <option value="TN" <%= event.event_state === 'TN' ? 'selected' : '' %>>Tennessee</option>
+            <option value="TX" <%= event.event_state === 'TX' ? 'selected' : '' %>>Texas</option>
+            <option value="UT" <%= event.event_state === 'UT' ? 'selected' : '' %>>Utah</option>
+            <option value="VT" <%= event.event_state === 'VT' ? 'selected' : '' %>>Vermont</option>
+            <option value="VA" <%= event.event_state === 'VA' ? 'selected' : '' %>>Virginia</option>
+            <option value="WA" <%= event.event_state === 'WA' ? 'selected' : '' %>>Washington</option>
+            <option value="WV" <%= event.event_state === 'WV' ? 'selected' : '' %>>West Virginia</option>
+            <option value="WI" <%= event.event_state === 'WI' ? 'selected' : '' %>>Wisconsin</option>
+            <option value="WY" <%= event.event_state === 'WY' ? 'selected' : '' %>>Wyoming</option>
+        </select><br>
 
         <label for="event_zip">Event Zip:</label>
         <input type="text" id="event_zip" name="event_zip" value="<%= event.event_zip %>" required><br>
-
-        <label for="event_additional_info">Additional Info:</label>
-        <textarea id="event_additional_info" name="event_additional_info"><%= event.event_additional_info %></textarea><br>
 
         <label for="jen_share_story">Jen Share Story:</label>
         <input type="checkbox" id="jen_share_story" name="jen_share_story" <%= event.jen_share_story ? 'checked' : '' %>><br>
@@ -73,6 +132,9 @@
 
         <label for="confirmed_status">Completed Status:</label>
         <input type="checkbox" id="confirmed_status" name="confirmed_status" <%= event.confirmed_status ? 'checked' : '' %>><br>
+
+        <label for="add_info">Additional Info:</label>
+        <textarea id="add_info" name="add_info"><%= event.add_info %></textarea><br>
 
         <button type="submit">Save Changes</button>
     </form>

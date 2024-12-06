@@ -137,6 +137,8 @@
             <td><%= row.willing_hours_per_month %></td> 
             <!-- Action buttons (Edit and Delete) -->
             <td>
+
+              <!-- Edit button -->
               <form action="/editVolunteers/<%= row.vol_id %>" method="GET" style="display:inline;">
                 <button type="submit">Edit</button>
               </form>
@@ -154,17 +156,12 @@
       <% } %>
     </tbody>
   </table>
-
-  <!-- Add Volunteer Button -->
-  <div class="bottom-buttons">
-    <form action="/addVolunteers" method="GET">
-      <button type="submit">Add New Volunteer</button>
-    </form>
-    <!-- Back to Dashboard Button -->
-    <form action="/user-home" method="GET">
-      <button type="submit">Back to Admin Dashboard</button>
-    </form>
-  </div>
-
+  <form action="/volunteer-form" method="GET" style="display: flex; justify-content: center; margin: 20px 0;">
+    <button type="submit">Add New Volunteer</button>
+  </form>
+  <!-- Button to navigate to the "UserHome" page -->
+  <form action="/user-home" method="GET" style="display: flex; justify-content: center; margin: 20px 0;">
+    <button type="submit">Back to Admin Dashboard</button>
+  </form>
 </body>
 </html>
