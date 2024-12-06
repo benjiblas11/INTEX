@@ -39,7 +39,7 @@
     <div>
       <label for="vol_email">Email:</label>
       <input 
-        type="email" 
+        type="text" 
         id="vol_email" 
         name="vol_email" 
         value="<%= volunteer.vol_email %>" 
@@ -47,6 +47,7 @@
         placeholder="Enter email address"
       >
     </div>
+    
 
     <!-- Volunteer Phone Number -->
     <div>
@@ -77,14 +78,16 @@
     <!-- Referral Source -->
     <div>
       <label for="referral_source">Referral Source:</label>
-      <input 
-        type="text" 
-        id="referral_source" 
-        name="referral_source" 
-        value="<%= volunteer.referral_source %>" 
-        placeholder="Enter referral source"
-      >
+      <select id="referral_source" name="referral_source" required>
+        <option value="" disabled selected>Select a referral source</option>
+        <option value="Friend" <%= volunteer.referral_source === 'Friend' ? 'selected' : '' %>>Friend</option>
+        <option value="Referral" <%= volunteer.referral_source === 'Referral' ? 'selected' : '' %>>Referral</option>
+        <option value="Facebook" <%= volunteer.referral_source === 'Facebook' ? 'selected' : '' %>>Facebook</option>
+        <option value="Event" <%= volunteer.referral_source === 'Event' ? 'selected' : '' %>>Event</option>
+        <option value="Website" <%= volunteer.referral_source === 'Website' ? 'selected' : '' %>>Website</option>
+      </select>
     </div>
+    
 
     <!-- Sewing Level -->
     <div>

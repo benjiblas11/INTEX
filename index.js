@@ -416,7 +416,7 @@ app.get('/editEvents/:id', (req, res) => {
 
 // EDIT VOLUNTEER post
 app.post('/editEvents/:id', (req, res) => {
-  const eventId = req.params.id;
+  const id = req.params.id;
   const updatedEvent = {
     exp_total_attendance: parseInt(req.body.exp_total_attendance),
     event_type: req.body.event_type,
@@ -443,7 +443,7 @@ app.post('/editEvents/:id', (req, res) => {
   };
 
   knex('event')
-    .where('id', eventId)
+    .where('event_id', id)
     .update(updatedEvent)
     .then(() => {
       res.redirect('/view-upcoming-events-date');
