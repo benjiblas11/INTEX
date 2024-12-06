@@ -104,7 +104,7 @@ app.post('/submit-event-request', (req, res) => {
       
     })
     .then(() => {
-      res.redirect('/success'); // Redirect to a success page
+      res.redirect('/howucanhelp?eventRequest=true'); // Redirect to a success page
     })
     .catch(error => {
       console.error('Error submitting event request:', error);
