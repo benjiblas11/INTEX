@@ -5,7 +5,84 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Edit Volunteer</title>
   <link rel="stylesheet" href="/styles.css"> <!-- Link your CSS file -->
-</head>
+</head><style>/* General styling */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #d9f9f9;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Center the form */
+  h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: #00796b;
+  }
+  
+  form {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Style for form elements */
+  div {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  input, select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+  
+  input[type="number"], input[type="tel"], input[type="text"], input[type="email"] {
+    max-width: 100%;
+  }
+  
+  select {
+    font-size: 16px;
+  }
+  
+  input:focus, select:focus {
+    border-color: #5b9bd5;
+    outline: none;
+  }
+  
+  /* Button styling */
+  button {
+    background-color: #4db6ac;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+  }
+  
+  button:hover {
+    background-color: #00796b;
+  }
+  
+  button:active {
+    background-color: #3e8e41;
+  }
+  </style>
 <body>
   <h1>Edit Volunteer Details</h1>
   <form action="/editVolunteers/<%= volunteer.vol_id %>" method="POST">
