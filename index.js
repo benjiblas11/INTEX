@@ -399,17 +399,17 @@ app.post('/addEvents', (req, res) => {
 app.get('/editEvents/:id', (req, res) => {
   const id = req.params.id;
 
-  knex('event')
-    .where('event_id', id)
-    .first() // Fetch the first matching record
+  knex('event')  // Ensure we're querying the 'event' table
+    .where('event_id', id)  // Correct column name should be 'event_id'
+    .first()  // Fetch the first matching record
     .then(event => {
       if (!event) {
-        return res.status(404).send('event not found');
+        return res.status(404).send('Event not found');  // Use correct error message for events
       }
-      res.render('editEvents', { event }); // Pass the volunteer data to the EJS file
+      res.render('editEvents', { event });  // Pass the event data to the EJS file
     })
     .catch(error => {
-      console.error('Error fetching volunteer for editing:', error);
+      console.error('Error fetching event for editing:', error);  // Correct log message
       res.status(500).send('Internal Server Error');
     });
 });
