@@ -72,75 +72,93 @@
             <a href="/volunteer-main" class="learn-more-btn">Learn More</a>
         </div>
     </div>
-    
+        <!-- First Thank You Modal -->
     <div id="thankYouModal" style="display: none;">
         <div class="modal-overlay">
-          <div class="modal-content">
-            <h2>Thank You For Volunteering!</h2>
-            <p>We will be in touch soon.</p>
-            <button class="modal-button" onclick="closeModal()">Close</button>
-          </div>
+            <div class="modal-content">
+                <h2>Thank You For Volunteering!</h2>
+                <p>We will be in touch soon.</p>
+                <button class="modal-button" onclick="closeModal()">Close</button>
+            </div>
         </div>
-      </div>
-      
-      <style>
-        /* Modal overlay (background dimming) */
-        .modal-overlay {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-color: rgba(0, 0, 0, 0.6);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          z-index: 1000;
-        }
-      
-        /* Modal box */
-        .modal-content {
-          background-color: var(--modal-bg-color, #fff); /* Customize with your modal background color */
-          color: var(--modal-text-color, #333);          /* Customize with your text color */
-          padding: 30px;
-          border-radius: 10px;
-          text-align: center;
-          width: 90%;
-          max-width: 400px;
-          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-      
-        /* Modal button */
-        .modal-button {
-          background-color: var(--button-bg-color, #008080); /* Customize with your button color */
-          color: var(--button-text-color, #fff);            /* Customize with your button text color */
-          border: none;
-          padding: 10px 20px;
-          border-radius: 5px;
-          font-size: 16px;
-          cursor: pointer;
-          margin-top: 20px;
-          transition: background-color 0.3s ease;
-        }
-      
-        .modal-button:hover {
-          background-color: var(--button-hover-color, #00b3b3); /* Adjust hover effect */
-        }
-      </style>
-      
-      <script>
-        // Show modal if success=true
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('success') === 'true') {
-          document.getElementById('thankYouModal').style.display = 'block';
-        }
-      
-        // Close the modal
-        function closeModal() {
-          document.getElementById('thankYouModal').style.display = 'none';
-        }
-      </script>
-      
+    </div>
+
+    <!-- Second Thank You Modal -->
+    <div id="thankYouModal2" style="display: none;">
+        <div class="modal-overlay">
+            <div class="modal-content">
+                <h2>Thank You For Requesting An Event!</h2>
+                <p>We will be in touch soon.</p>
+                <button class="modal-button" onclick="closeModal2()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Styles -->
+    <style>
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .modal-content {
+        background-color: #fff;
+        color: #333;
+        padding: 30px;
+        border-radius: 10px;
+        text-align: center;
+        width: 90%;
+        max-width: 400px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-button {
+        background-color: #008080;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: background-color 0.3s ease;
+    }
+
+    .modal-button:hover {
+        background-color: #00b3b3;
+    }
+    </style>
+
+    <!-- Modal Scripts -->
+    <script>
+    // Show modal based on URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    if (urlParams.get('success') === 'true') {
+        document.getElementById('thankYouModal').style.display = 'block';
+    } else if (urlParams.get('eventRequest') === 'true') {
+        document.getElementById('thankYouModal2').style.display = 'block';
+    }
+
+    // Close first modal
+    function closeModal() {
+        document.getElementById('thankYouModal').style.display = 'none';
+    }
+
+    // Close second modal
+    function closeModal2() {
+        document.getElementById('thankYouModal2').style.display = 'none';
+    }
+    </script>
+
   
 
     <!-- FOOTER -->
