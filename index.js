@@ -661,6 +661,10 @@ app.post('/submit-volunteer-form', (req, res) => {
     });
 });
 
+// get route for add rows
+app.get('/add-events', (req, res) => {
+  res.render('addEvents'); // Ensure this matches the EJS file name (volunteerForm.ejs)
+});
 
 // ABOVE WORKS --------------------------------------------------------
 
