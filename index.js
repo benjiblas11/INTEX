@@ -335,6 +335,8 @@ app.get('/addEvents', (req, res) => {
   res.render('addEvents');
 });
 
+// NOAH STUFF \/\/\/\/\/\/----------------------------------------------------------------------------------------------------------------------
+
 // ADMIN Route to handle event form submission
 app.post('/addEvents', (req, res) => {
   // Access each value directly from req.body
@@ -452,10 +454,12 @@ app.post('/editEvents/:id', (req, res) => {
     });
 });
 
+//VIEW VOLUNTEERS ---------------------------------------------
+
 app.get('/view-volunteers', (req, res) => {
   knex('volunteer')
     .select(
-      'volunteer.volunteer_id',
+      'volunteer.vol_id',
       'volunteer.vol_first_name',
       'volunteer.vol_last_name',
       'volunteer.vol_email',
@@ -464,9 +468,9 @@ app.get('/view-volunteers', (req, res) => {
       'volunteer.referral_source',
       'volunteer.sewing_level',
       'volunteer.willing_hours_per_month',
-      'volunteer.member_since'
+      //'volunteer.member_since'
     )
-
+    .orderBy('vol_last_name', 'asc')
     .then(volunteer => {
       // Render the viewVolunteers.ejs template and pass the data
       res.render('viewVolunteers', { volunteer }); // pass security to this too. Check if it's true. If it is, render the buttons to perform the actions. 1st, go make a user table. 2nd, after you make the table, add a record. (you may need to be able to do this on an ejs file.) 3rd, pass the variable on this line to the ejs file then modify the ejs file.
@@ -477,6 +481,7 @@ app.get('/view-volunteers', (req, res) => {
     });
 });
 
+ 
 app.get('/addVolunteers', (req, res) => {
   res.render('addVolunteers');
 });
@@ -524,7 +529,7 @@ app.get('/editVolunteers/:id', (req, res) => {
   const id = req.params.id;
 
   knex('volunteer')
-    .where('volunteer_id', id)
+    .where('vol_id', id)
     .first() // Fetch the first matching record
     .then(volunteer => {
       if (!volunteer) {
@@ -555,10 +560,10 @@ app.post('/editVolunteers/:id', async (req, res) => {
 
   try {
     await knex('volunteer')
-      .where('volunteer_id', id)
+      .where('vol_id', id)
       .update({
-        vol_first_name: vol_first_name.toUpperCase(), // Convert to uppercase
-        vol_last_name: vol_last_name.toUpperCase(),  // Convert to uppercase
+        vol_first_name: vol_first_name, // Convert to uppercase
+        vol_last_name: vol_last_name,  // Convert to uppercase
         vol_email: vol_email,
         vol_phone_num: vol_phone_num,
         vol_zip: vol_zip,
@@ -729,6 +734,7 @@ app.post('/deleteVolunteers/:id', (req, res) => {
       res.status(500).send('Internal Server Error');
     });
 });
+// NOAH STUFF /\/\/\/\/\/\/\/\----------------------------------------------------------------------------------------------------------------------
 
 // ABOVE WORKS ----------------------------------------------------------------------------------
 
