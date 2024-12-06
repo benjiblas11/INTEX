@@ -43,8 +43,10 @@
         <!-- Column headers for the table -->
         <th>Name</th>
         <th>Email</th>
+        <th>Password</th>
         <th>Created At</th>
         <th>Updated At</th>
+        <th>Edit / Delete</th>
       </tr>
     </thead>
     <tbody>
@@ -64,7 +66,7 @@
             <td><%= row.admin_email %></td> 
             <td><%= row.hashed_password %></td> 
             <td><%= row.created_at %></td> <!-- Format the date to a user-friendly format -->
-            <td><%= row.updated_at></td> <!-- Display 'Yes' if active, otherwise 'No' -->
+            <td><%= row.updated_at %></td> <!-- Display 'Yes' if active, otherwise 'No' -->
             <!-- Action buttons (Edit and Delete) -->
             <td>
               <!-- Edit button -->
