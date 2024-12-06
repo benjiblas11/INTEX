@@ -15,51 +15,57 @@
             background: var(--teal-background); /* Teal background from variable */
             color: #2d3436;
         }
-    
+
         /* Sidebar Styles */
         .sidebar {
             background-color: var(--teal); /* Teal background from variable */
             width: 250px;
-            padding: 20px;
+            padding: 30px;
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
             height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: flex-start;
+            align-items: center; /* Center items horizontally */
         }
         .sidebar h1 {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             color: #ffffff;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            text-align: center;
         }
         .sidebar .action-buttons {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
+            width: 100%;
         }
-        .sidebar .action-buttons a, .sidebar .action-buttons button {
+        .sidebar .action-buttons form {
+            width: 100%;
+        }
+        .sidebar .action-buttons button {
             color: #ffffff;
             background: var(--teal-light); /* Lighter teal for button background */
             padding: 12px 20px;
             border-radius: 6px;
             font-size: 1rem;
-            text-decoration: none;
             text-align: center;
             border: none;
             cursor: pointer;
             transition: transform 0.3s ease, background-color 0.3s ease;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
+            width: 100%;
         }
-        .sidebar .action-buttons a:hover, .sidebar .action-buttons button:hover {
+        .sidebar .action-buttons button:hover {
             background: var(--teal); /* Darker teal for hover */
             transform: translateY(-2px); /* Lift the button on hover */
         }
-        .sidebar .action-buttons a:active, .sidebar .action-buttons button:active {
+        .sidebar .action-buttons button:active {
             transform: translateY(1px); /* Slight depression effect when clicked */
         }
-    
+
         footer {
-            margin-top: 20px;
+            margin-top: 250px;
             font-size: 0.9rem;
             color: #b2bec3;
             text-align: center;
@@ -71,7 +77,7 @@
         footer a:hover {
             text-decoration: underline;
         }
-    
+
         /* Main Content */
         .main-content {
             flex-grow: 1;
@@ -80,6 +86,8 @@
             margin-left: 250px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 12px;
+            display: flex;
+            flex-direction: column;
         }
         .main-content h2 {
             color: var(--teal); /* Teal text color */
@@ -111,25 +119,25 @@
     <div class="sidebar">
         <h1>Admin Panel</h1>
         <div class="action-buttons">
-            <form action="/view-upcoming-events-date" method="GET" style="display: inline;">
+            <form action="/view-upcoming-events-date" method="GET">
                 <button type="submit" class="button">View Upcoming Events</button>
             </form>
             
-            <form action="/view-completed-events" method="GET" style="display: inline;">
+            <form action="/view-completed-events" method="GET">
                 <button type="submit" class="button">View Completed Events</button>
             </form>
             
-            <form action="/view-volunteers" method="GET" style="display: inline;">
+            <form action="/view-volunteers" method="GET">
                 <button type="submit" class="button">View Volunteers</button>
             </form>
             
-            <form action="/view-admins" method="GET" style="display: inline;">
+            <form action="/view-admins" method="GET">
                 <button type="submit" class="button">View Admins</button>
             </form>
         </div>
         
         <footer>
-            Powered by <a href="https://turtleshell.is404.net">Turtle Shell Project</a>.
+            Powered by <a href="https://turtleshell.is404.net">Turtle Shelter Project</a>
         </footer>
     </div>
     <div class="main-content">
@@ -140,7 +148,36 @@
         <div class="tableau-container">
             <h3>Tableau Dashboard</h3>
             <p>Below is the embedded Tableau Public dashboard.</p>
-            <iframe src="YOUR_TABLEAU_PUBLIC_LINK_HERE"></iframe>
+            <div class='tableauPlaceholder' id='viz1733458941281' style='position: relative'>
+                <noscript>
+                    <a href='#'>
+                        <img alt=' ' src='https://public.tableau.com/static/images/7W/7W8D53TSJ/1_rss.png' style='border: none' />
+                    </a>
+                </noscript>
+                <object class='tableauViz' style='display:none;'>
+                    <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+                    <param name='embed_code_version' value='3' /> 
+                    <param name='path' value='shared/7W8D53TSJ' /> 
+                    <param name='toolbar' value='yes' />
+                    <param name='static_image' value='https://public.tableau.com/static/images/7W/7W8D53TSJ/1.png' /> 
+                    <param name='animate_transition' value='yes' />
+                    <param name='display_static_image' value='yes' />
+                    <param name='display_spinner' value='yes' />
+                    <param name='display_overlay' value='yes' />
+                    <param name='display_count' value='yes' />
+                    <param name='language' value='en-US' />
+                    <param name='filter' value='publish=yes' />
+                </object>
+            </div>                
+            <script type='text/javascript'>
+                var divElement = document.getElementById('viz1733458941281');
+                var vizElement = divElement.getElementsByTagName('object')[0];
+                vizElement.style.width='1300px';
+                vizElement.style.height='1150px';
+                var scriptElement = document.createElement('script');
+                scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+                vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+            </script>
         </div>
     </div>
 </body>
