@@ -584,7 +584,7 @@ app.post('/editVolunteers/:id', async (req, res) => {
 app.get('/view-admins', (req, res) => {
   knex('admin')
     .select(
-      'admin.adminID',
+      'admin.admin_id',
       'admin.admin_first_name',
       'admin.admin_last_name',
       'admin.admin_email',
@@ -667,7 +667,10 @@ app.post('/addAdmin', (req, res) => {
 app.get('/add-events', (req, res) => {
   res.render('addEvents'); // Ensure this matches the EJS file name (volunteerForm.ejs)
 });
-
+// get route for admins
+app.get('/view-admins', (req, res) => {
+  res.render('viewAdmins'); // Ensure this matches the EJS file name (volunteerForm.ejs)
+});
 
 // POST for EDITS
 app.post('/editAdmin/:id', (req, res) => {
