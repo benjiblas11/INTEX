@@ -731,17 +731,25 @@ app.post('/deleteEvents/:id', (req, res) => {
 
 app.post('/deleteVolunteers/:id', (req, res) => {
   const id = req.params.id;
+  console.log("Attempting to delete volunteer with ID:", id);
+
   knex('volunteer')
     .where('vol_id', id)
-    .del() // Deletes the record with the specified ID
-    .then(() => {
-      res.redirect('/view-volunteers'); // Redirect to the character list after deletion
+    .del()
+    .then(result => {
+      console.log("Delete result:", result); // Check how many rows were deleted
+      if (result) {
+        res.redirect('/view-volunteers');
+      } else {
+        res.status(404).send('Volunteer not found');
+      }
     })
     .catch(error => {
-      console.error('Error deleting character:', error);
-      res.status(500).send('Internal Server Error');
+      console.error('Error deleting volunteer:', error); // Log detailed error
+      res.status(500).send('Cannot delete volunteer because they are admins');
     });
 });
+
 // NOAH STUFF /\/\/\/\/\/\/\/\----------------------------------------------------------------------------------------------------------------------
 
 // ABOVE WORKS ----------------------------------------------------------------------------------
